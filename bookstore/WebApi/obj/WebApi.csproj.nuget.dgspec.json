@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/serhatoner/NET6/bookstore/WebApi/WebApi.csproj": {}
+    "/home/serhatoner/NET6/playground/bookstore/WebApi/WebApi.csproj": {}
   },
   "projects": {
-    "/home/serhatoner/NET6/bookstore/WebApi/WebApi.csproj": {
+    "/home/serhatoner/NET6/playground/bookstore/WebApi/WebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/serhatoner/NET6/bookstore/WebApi/WebApi.csproj",
+        "projectUniqueName": "/home/serhatoner/NET6/playground/bookstore/WebApi/WebApi.csproj",
         "projectName": "WebApi",
-        "projectPath": "/home/serhatoner/NET6/bookstore/WebApi/WebApi.csproj",
+        "projectPath": "/home/serhatoner/NET6/playground/bookstore/WebApi/WebApi.csproj",
         "packagesPath": "/home/serhatoner/.nuget/packages/",
-        "outputPath": "/home/serhatoner/NET6/bookstore/WebApi/obj/",
+        "outputPath": "/home/serhatoner/NET6/playground/bookstore/WebApi/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/serhatoner/.nuget/NuGet/NuGet.Config"
@@ -73,6 +73,10 @@
             "Microsoft.Extensions.DependencyInjection": {
               "target": "Package",
               "version": "[6.0.2-mauipre.1.22102.15, )"
+            },
+            "NewtonSoft.json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DG0GDKbSp19UM4O+YCfi7wh1uoCxxHZmz3d8GJ9LjScegAfhtLXkG+wXDeOWu8CqlNEzHm4uZy3EgEl/s8KUug==",
+  "dgSpecHash": "unphgNUkMz0sKsuiefOOl/HRpuXXpUtj9zCDVvZZZ1JfT9eBWPnuOaABiPIq5naKmCMaVTiD1fQyS+B5j6qEmQ==",
   "success": true,
-  "projectFilePath": "/home/serhatoner/NET6/bookstore/WebApi/WebApi.csproj",
+  "projectFilePath": "/home/serhatoner/NET6/playground/bookstore/WebApi/WebApi.csproj",
   "expectedPackageFiles": [
     "/home/serhatoner/.nuget/packages/automapper/11.0.1/automapper.11.0.1.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/11.0.0/automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
@@ -27,6 +27,7 @@
     "/home/serhatoner/.nuget/packages/microsoft.extensions.options/6.0.0/microsoft.extensions.options.6.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.extensions.primitives/6.0.0/microsoft.extensions.primitives.6.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/swashbuckle.aspnetcore.swagger/6.2.3/swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/swashbuckle.aspnetcore.swaggergen/6.2.3/swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",

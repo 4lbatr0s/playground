@@ -1,0 +1,15 @@
+/home/serhat/NET6/playground/obj/Debug/net6.0/playground.csproj.AssemblyReference.cache
+/home/serhat/NET6/playground/obj/Debug/net6.0/playground.GeneratedMSBuildEditorConfig.editorconfig
+/home/serhat/NET6/playground/obj/Debug/net6.0/playground.AssemblyInfoInputs.cache
+/home/serhat/NET6/playground/obj/Debug/net6.0/playground.AssemblyInfo.cs
+/home/serhat/NET6/playground/obj/Debug/net6.0/playground.csproj.CoreCompileInputs.cache
+/home/serhat/NET6/playground/bin/Debug/net6.0/playground
+/home/serhat/NET6/playground/bin/Debug/net6.0/playground.deps.json
+/home/serhat/NET6/playground/bin/Debug/net6.0/playground.runtimeconfig.json
+/home/serhat/NET6/playground/bin/Debug/net6.0/playground.dll
+/home/serhat/NET6/playground/bin/Debug/net6.0/playground.pdb
+/home/serhat/NET6/playground/obj/Debug/net6.0/playground.dll
+/home/serhat/NET6/playground/obj/Debug/net6.0/refint/playground.dll
+/home/serhat/NET6/playground/obj/Debug/net6.0/playground.pdb
+/home/serhat/NET6/playground/obj/Debug/net6.0/playground.genruntimeconfig.cache
+/home/serhat/NET6/playground/obj/Debug/net6.0/ref/playground.dll
