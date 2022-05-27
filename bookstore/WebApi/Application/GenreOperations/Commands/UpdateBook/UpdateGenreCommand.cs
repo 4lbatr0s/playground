@@ -6,9 +6,9 @@ namespace WebApi.Application.GenreOperations.Commands;
 
 public class UpdateGenreCommand
 {
-    private readonly BookStoreDBContext _dbContext;
+    private readonly IBookStoreDBContext _dbContext;
 
-    public UpdateGenreCommand(BookStoreDBContext dbContext)
+    public UpdateGenreCommand(IBookStoreDBContext dbContext)
     {
         _dbContext = dbContext;
     }

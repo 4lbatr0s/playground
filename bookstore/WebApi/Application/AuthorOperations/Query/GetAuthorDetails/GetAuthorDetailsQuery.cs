@@ -6,12 +6,12 @@ namespace WebApi.Application.GenreOperations.Queries;
 
 public class GetAuthorDetailsQuery
 {
-    private readonly BookStoreDBContext _dbContext;
+    private readonly IBookStoreDBContext _dbContext;
     private readonly IMapper _mapper;
 
     public int AuthorId { get; set; }
 
-    public GetAuthorDetailsQuery(BookStoreDBContext dbContext, IMapper mapper)
+    public GetAuthorDetailsQuery(IBookStoreDBContext dbContext, IMapper mapper)
     {
         _dbContext = dbContext;
         _mapper = mapper;
@@ -36,5 +36,6 @@ public class AuthorDetailsView
     public string? FullName {get; set;}
     
     public DateTime BirthDate{get; set;}
+    public List<Book> Books {get; set;}
 
 }

@@ -38,9 +38,6 @@
 /home/serhatoner/NET6/bookstore/WebApi/bin/Debug/net6.0/AutoMapper.dll
 /home/serhatoner/NET6/bookstore/WebApi/bin/Debug/net6.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
 /home/serhatoner/NET6/bookstore/WebApi/bin/Debug/net6.0/FluentValidation.dll
-/home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/WebApi.dll
-/home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/refint/WebApi.dll
-/home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/WebApi.pdb
 /home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/appsettings.Development.json
 /home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/appsettings.json
 /home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/WebApi
@@ -61,6 +58,7 @@
 /home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Microsoft.Extensions.DependencyInjection.dll
 /home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
 /home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Microsoft.OpenApi.dll
+/home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Newtonsoft.Json.dll
 /home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Swashbuckle.AspNetCore.Swagger.dll
 /home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Swashbuckle.AspNetCore.SwaggerUI.dll
@@ -76,6 +74,8 @@
 /home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/staticwebassets.development.json
 /home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/scopedcss/bundle/WebApi.styles.css
 /home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/WebApi.csproj.CopyComplete
+/home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/WebApi.dll
+/home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/refint/WebApi.dll
+/home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/WebApi.pdb
 /home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/WebApi.genruntimeconfig.cache
 /home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/ref/WebApi.dll
-/home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Newtonsoft.Json.dll

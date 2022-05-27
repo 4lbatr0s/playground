@@ -4,7 +4,7 @@ using WebApi.Entities;
 namespace WebApi
 {
 
-    public class Book {
+    public class Book:IEntity {
 
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id {get; set;}

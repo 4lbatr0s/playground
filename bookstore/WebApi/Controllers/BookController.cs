@@ -15,10 +15,10 @@ namespace WebApi.Controllers
     [Route("[controller]s")]
     public class BookController:ControllerBase //mvc uzayindan gelir.
     {
-        private readonly BookStoreDBContext _bookStoreDbContext; // readonly : cannot be changed inside from application.
+        private readonly IBookStoreDBContext _bookStoreDbContext; // readonly : cannot be changed inside from application.
         private readonly IMapper _mapper;
 
-        public BookController(BookStoreDBContext bookStoreDbContext, IMapper mapper )
+        public BookController(IBookStoreDBContext bookStoreDbContext, IMapper mapper )
         {
             _bookStoreDbContext = bookStoreDbContext;
             _mapper = mapper;

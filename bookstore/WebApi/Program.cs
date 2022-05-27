@@ -12,6 +12,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //database.
 builder.Services.AddDbContext<BookStoreDBContext>(options => options.UseInMemoryDatabase(databaseName: "BookStoreDB"));
+//IBookStoreDBContext instance'i bir request baslatildiginda olustuurlsun ve request bittiğinde yok olsun.
+//provider => provider.GetService.. sana bir provider veriyorum ve o provider da BookStoreDBContext, yani bunun ornegini uret.
+builder.Services.AddScoped<IBookStoreDBContext>(provider => provider.GetService<BookStoreDBContext>()); 
 //automapper
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 //DI Container Services

@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace WebApi.Entities;
 
-public class Genre
+public class Genre:IEntity
 {
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id {get; set;}

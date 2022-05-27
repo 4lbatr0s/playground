@@ -6,8 +6,8 @@ namespace WebApi.Application.BookOperations.Commands.UpdateBook;
     {
         public UpdateGenreCommandValidator()
         {
-            RuleFor(command => command.GenreId).NotEmpty().GreaterThanOrEqualTo(0);
-            RuleFor(command => command.Model.isActive).NotEmpty();
+            RuleFor(command => command.GenreId).NotEmpty().GreaterThanOrEqualTo(1);
+            RuleFor(command => command.Model.isActive).NotNull();
             RuleFor(command => command.Model.Name).MinimumLength(4).NotEmpty();
         }
     }
