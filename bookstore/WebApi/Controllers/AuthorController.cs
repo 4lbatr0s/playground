@@ -8,10 +8,11 @@ using WebApi.Application.AuthorOperations;
 using WebApi.Application.AuthorOperations.Commands.UpdateAuthor;
 using WebApi.Application.AuthorOperations.Commands.CreateAuthor;
 using WebApi.Application.authorOperations.Commands.DeleteAuthor;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controllers
 {
-
+    [Authorize] //endpointleri korumak ve jwt implementasyonu
     [ApiController]
     [Route("[controller]s")]
     public class AuthorController:ControllerBase //mvc uzayindan gelir.

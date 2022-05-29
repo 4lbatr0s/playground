@@ -3,6 +3,7 @@ using WebApi.Application.AuthorOperations;
 using WebApi.Application.BookOperations.CreateBook.Commands;
 using WebApi.Application.BookOperations.Queries.GetBooks;
 using WebApi.Application.GenreOperations.Commands;
+using WebApi.Application.UserOperations.CreateUser.Commands;
 using WebApi.Entities;
 
 namespace WebApi.Application.GenreOperations.Queries;
@@ -14,6 +15,7 @@ namespace WebApi.Application.GenreOperations.Queries;
             CreateMap<CreateBookModel, Book>();
             CreateMap<CreateGenreModel, Genre>();
             CreateMap<CreateAuthorModel, Author>();
+            CreateMap<CreateUserModel, User>();
             //source->target: but modify target's genre.
             //to use Genre.Name, we need to Include Genre to _dbContext.Books inside of BookQueries..
             CreateMap<Book, BookDetailView>()
@@ -24,7 +26,6 @@ namespace WebApi.Application.GenreOperations.Queries;
             .ForMember(dest => dest.Author, opt => opt.MapFrom(src => src.Author.Name + " " + src.Author.Surname));
             CreateMap<Genre, GenresViewModel>();
             CreateMap<Genre, GenreDetailsView>();
-
             CreateMap<Author, AuthorsViewModel>()
             .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.Name + " " + src.Surname));
             CreateMap<Author, AuthorDetailsView>()

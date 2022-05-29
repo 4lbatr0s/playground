@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "unphgNUkMz0sKsuiefOOl/HRpuXXpUtj9zCDVvZZZ1JfT9eBWPnuOaABiPIq5naKmCMaVTiD1fQyS+B5j6qEmQ==",
+  "dgSpecHash": "N9839soGQJLRG94JNdTdQb86jQSD9TYceLd0IwttXyENp0rndnz0FzajIgXPRFvveC6lWaqVkAvUhJ/uSv/HPA==",
   "success": true,
   "projectFilePath": "/home/serhatoner/NET6/playground/bookstore/WebApi/WebApi.csproj",
   "expectedPackageFiles": [
@@ -8,6 +8,7 @@
     "/home/serhatoner/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/11.0.0/automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/fluentvalidation/11.0.1/fluentvalidation.11.0.1.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/6.0.5/microsoft.aspnetcore.authentication.jwtbearer.6.0.5.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.csharp/4.7.0/microsoft.csharp.4.7.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.entityframeworkcore/6.0.5/microsoft.entityframeworkcore.6.0.5.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.entityframeworkcore.abstractions/6.0.5/microsoft.entityframeworkcore.abstractions.6.0.5.nupkg.sha512",
@@ -26,6 +27,11 @@
     "/home/serhatoner/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.extensions.options/6.0.0/microsoft.extensions.options.6.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.extensions.primitives/6.0.0/microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.identitymodel.jsonwebtokens/6.10.0/microsoft.identitymodel.jsonwebtokens.6.10.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.identitymodel.logging/6.10.0/microsoft.identitymodel.logging.6.10.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.identitymodel.protocols/6.10.0/microsoft.identitymodel.protocols.6.10.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/6.10.0/microsoft.identitymodel.protocols.openidconnect.6.10.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.identitymodel.tokens/6.10.0/microsoft.identitymodel.tokens.6.10.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.openapi/1.2.3/microsoft.openapi.1.2.3.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/newtonsoft.json/13.0.1/newtonsoft.json.13.0.1.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/swashbuckle.aspnetcore/6.2.3/swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
@@ -34,7 +40,9 @@
     "/home/serhatoner/.nuget/packages/swashbuckle.aspnetcore.swaggerui/6.2.3/swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/system.collections.immutable/6.0.0/system.collections.immutable.6.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/system.diagnostics.diagnosticsource/6.0.0/system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
-    "/home/serhatoner/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.2-mauipre.1.22102.15/system.runtime.compilerservices.unsafe.6.0.2-mauipre.1.22102.15.nupkg.sha512"
+    "/home/serhatoner/.nuget/packages/system.identitymodel.tokens.jwt/6.10.0/system.identitymodel.tokens.jwt.6.10.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.2-mauipre.1.22102.15/system.runtime.compilerservices.unsafe.6.0.2-mauipre.1.22102.15.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/system.security.cryptography.cng/4.5.0/system.security.cryptography.cng.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

@@ -124,3 +124,10 @@
 /home/serhatoner/NET6/playground/bookstore/Tests/WebApi.UnitTest/obj/Debug/net6.0/WebApi.UnitTest.pdb
 /home/serhatoner/NET6/playground/bookstore/Tests/WebApi.UnitTest/obj/Debug/net6.0/WebApi.UnitTest.genruntimeconfig.cache
 /home/serhatoner/NET6/playground/bookstore/Tests/WebApi.UnitTest/obj/Debug/net6.0/ref/WebApi.UnitTest.dll
+/home/serhatoner/NET6/playground/bookstore/Tests/WebApi.UnitTest/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/serhatoner/NET6/playground/bookstore/Tests/WebApi.UnitTest/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/serhatoner/NET6/playground/bookstore/Tests/WebApi.UnitTest/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+/home/serhatoner/NET6/playground/bookstore/Tests/WebApi.UnitTest/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
+/home/serhatoner/NET6/playground/bookstore/Tests/WebApi.UnitTest/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/serhatoner/NET6/playground/bookstore/Tests/WebApi.UnitTest/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
+/home/serhatoner/NET6/playground/bookstore/Tests/WebApi.UnitTest/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll

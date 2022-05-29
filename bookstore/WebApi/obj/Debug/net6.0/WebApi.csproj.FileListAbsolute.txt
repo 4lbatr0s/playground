@@ -79,3 +79,10 @@
 /home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/WebApi.pdb
 /home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/WebApi.genruntimeconfig.cache
 /home/serhatoner/NET6/playground/bookstore/WebApi/obj/Debug/net6.0/ref/WebApi.dll
+/home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Microsoft.IdentityModel.Logging.dll
+/home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.dll
+/home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/Microsoft.IdentityModel.Tokens.dll
+/home/serhatoner/NET6/playground/bookstore/WebApi/bin/Debug/net6.0/System.IdentityModel.Tokens.Jwt.dll
