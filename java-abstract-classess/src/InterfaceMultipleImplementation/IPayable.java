@@ -1,2 +1,5 @@
-package InterfaceMultipleImplementation;public interface IPayable {
+package InterfaceMultipleImplementation;
+
+public interface IPayable {
+    void Pay();
 }

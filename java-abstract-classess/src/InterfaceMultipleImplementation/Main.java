@@ -1,2 +1,7 @@
-package InterfaceMultipleImplementation;public class Main {
+package InterfaceMultipleImplementation;
+
+public class Main {
+    public static void main ( String[] args ) {
+
+    }
 }

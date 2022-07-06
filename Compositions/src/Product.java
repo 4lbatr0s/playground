@@ -1,2 +1,5 @@
-package PACKAGE_NAME;public class Product {
+public class Product {
+    int id;
+    String name;
+    double price;
 }

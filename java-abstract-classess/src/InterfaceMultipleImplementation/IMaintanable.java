@@ -1,2 +1,5 @@
-package InterfaceMultipleImplementation;public interface IMaintanable {
+package InterfaceMultipleImplementation;
+
+public interface IMaintanable {
+    void Maintain();
 }

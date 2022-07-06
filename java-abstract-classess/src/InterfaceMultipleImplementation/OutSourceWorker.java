@@ -1,13 +1,9 @@
-package interfaces;
+package InterfaceMultipleImplementation;
 
-public class CompanyWorker implements IWorkable {
+public class OutSourceWorker implements IWorkable {
 
     @Override
     public void work () {
 
     }
-}
-
-public class CompanyWorker  implements IWorkable {
-
 }

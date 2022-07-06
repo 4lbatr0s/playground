@@ -1,3 +1,5 @@
+package Abstract1;
+
 public class WomanGameCalculator extends GameCalculator {
 
     @Override

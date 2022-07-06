@@ -1,2 +1,5 @@
-package InterfaceMultipleImplementation;public interface IEatable {
+package InterfaceMultipleImplementation;
+
+public interface IEatable {
+    void eat();
 }

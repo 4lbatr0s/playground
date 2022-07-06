@@ -1,3 +1,5 @@
+package Abstract1;
+
 public class ChildGameCalculator extends GameCalculator {
 
     @Override
