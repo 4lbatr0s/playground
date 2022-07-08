@@ -10,7 +10,7 @@ import java.util.List;
 
 public class UserDao implements IUserDao{
 
-    private DatabaseContext _context; //cannot use IDBContext due to lack of IoC.
+    private DatabaseContext<User> _context; //cannot use IDBContext due to lack of IoC.
 
     public UserDao ( ) {
         this._context = new DatabaseContext<User>();
@@ -24,7 +24,7 @@ public class UserDao implements IUserDao{
 
     @Override
     public void Remove ( User item ) {
-
+        _context.removeValueFromList ( item );
     }
 
     @Override

@@ -1,5 +1,9 @@
 package ECommerce.business.abstracts;
 
-public interface IUserService {
+import ECommerce.entities.concretes.User;
+
+public interface IUserService extends  IBaseService<User> {
+
+    void ClickActivationLink ();
 
 }

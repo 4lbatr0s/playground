@@ -12,11 +12,11 @@ public class GoogleAuthManagerAdapter implements IAuthService {
 
     @Override
     public void Login ( String username, String password ) {
-        googleAuthManager.Login( username, password );
+        googleAuthManager.LoginWithGoogle ( username, password );
     }
 
     @Override
     public void Register ( String username, String password ) {
-        googleAuthManager.SignUp ( username, password );
+        googleAuthManager.SignUpWithGoogle ( username, password );
     }
 }
