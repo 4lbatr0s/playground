@@ -1,5 +1,5 @@
 # Important Infos
-
+1. create a new component for chart.
 
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import './Sidebar.css';
-import {LineStyle, Timeline, TrendingUp} from '@mui/icons-material/';
+import {AttachMoneyOutlined, BarChartOutlined, EmailOutlined, ErrorOutline, ErrorOutlineOutlined, FeedbackOutlined, LineStyle, MessageOutlined, Person2Outlined, StorefrontOutlined, Timeline, TrendingUp, WorkOutline} from '@mui/icons-material/';
 const Sidebar = () => {
   return (
     <div className='sidebar'>
@@ -26,16 +26,20 @@ const Sidebar = () => {
                 <h3 className="sidebarTitle">Quick Menu</h3>
                 <ul className="sidebarList">
                     <li className="sidebarListItem">
-                        <LineStyle className="sidebarIcon"/>
-                        Home
+                        <Person2Outlined className="sidebarIcon"/>
+                        Users
                     </li>
                     <li className="sidebarListItem">
-                        <Timeline className="sidebarIcon"/>
-                        Analytics
+                        <StorefrontOutlined className="sidebarIcon"/>
+                        Products
                     </li>
                     <li className="sidebarListItem">
-                        <TrendingUp className="sidebarIcon"/>
-                        Sales
+                        <AttachMoneyOutlined className="sidebarIcon"/>
+                        Transactions
+                    </li>
+                    <li className="sidebarListItem">
+                        <BarChartOutlined className="sidebarIcon"/>
+                        Reports
                     </li>
                 </ul>
             </div>
@@ -43,16 +47,16 @@ const Sidebar = () => {
                 <h3 className="sidebarTitle">Notifications</h3>
                 <ul className="sidebarList">
                     <li className="sidebarListItem">
-                        <LineStyle className="sidebarIcon"/>
-                        Home
+                        <EmailOutlined className="sidebarIcon"/>
+                        Mail
+                    </li>
+                    <li  className="sidebarListItem">
+                        <FeedbackOutlined className="sidebarIcon"/>
+                        Feedback
                     </li>
                     <li className="sidebarListItem">
-                        <Timeline className="sidebarIcon"/>
-                        Analytics
-                    </li>
-                    <li className="sidebarListItem">
-                        <TrendingUp className="sidebarIcon"/>
-                        Sales
+                        <MessageOutlined className="sidebarIcon"/>
+                        Messages
                     </li>
                 </ul>
             </div>
@@ -60,7 +64,7 @@ const Sidebar = () => {
                 <h3 className="sidebarTitle">Staff</h3>
                 <ul className="sidebarList">
                     <li className="sidebarListItem">
-                        <LineStyle className="sidebarIcon"/>
+                        <WorkOutline className="sidebarIcon"/>
                         Home
                     </li>
                     <li className="sidebarListItem">
@@ -68,8 +72,8 @@ const Sidebar = () => {
                         Analytics
                     </li>
                     <li className="sidebarListItem">
-                        <TrendingUp className="sidebarIcon"/>
-                        Sales
+                        <ErrorOutline className="sidebarIcon"/>
+                        Reports
                     </li>
                 </ul>
             </div>

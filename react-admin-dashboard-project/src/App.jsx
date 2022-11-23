@@ -2,7 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Sidebar from './components/sidebar/Sidebar'
 import Topbar from './components/topbar/Topbar'
-
+import Homepage from './pages/homepage/Homepage'
 function App() {
 
   return (
@@ -10,7 +10,7 @@ function App() {
       <Topbar />
       <div className="container">
         <Sidebar/>
-        <div className="others">Others</div>
+        <Homepage/>
       </div>
     </div>
   )
