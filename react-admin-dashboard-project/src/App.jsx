@@ -3,6 +3,7 @@ import './App.css'
 import Sidebar from './components/sidebar/Sidebar'
 import Topbar from './components/topbar/Topbar'
 import Homepage from './pages/homepage/Homepage'
+import UserList from './pages/userlist/UserList'
 function App() {
 
   return (

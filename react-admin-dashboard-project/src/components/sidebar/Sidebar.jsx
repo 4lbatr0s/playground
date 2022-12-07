@@ -1,6 +1,7 @@
 import React from 'react'
 import './Sidebar.css';
 import {AttachMoneyOutlined, BarChartOutlined, EmailOutlined, ErrorOutline, ErrorOutlineOutlined, FeedbackOutlined, LineStyle, MessageOutlined, Person2Outlined, StorefrontOutlined, Timeline, TrendingUp, WorkOutline} from '@mui/icons-material/';
+import { Link } from 'react-router-dom';
 const Sidebar = () => {
   return (
     <div className='sidebar'>
@@ -25,14 +26,18 @@ const Sidebar = () => {
             <div className="sidebarMenu">
                 <h3 className="sidebarTitle">Quick Menu</h3>
                 <ul className="sidebarList">
-                    <li className="sidebarListItem">
-                        <Person2Outlined className="sidebarIcon"/>
-                        Users
-                    </li>
-                    <li className="sidebarListItem">
-                        <StorefrontOutlined className="sidebarIcon"/>
-                        Products
-                    </li>
+                    <Link  to="/users" className='link'> {/**INFO: className:link, go App.css and see it! */}
+                        <li className="sidebarListItem">
+                            <Person2Outlined className="sidebarIcon"/>
+                            Users
+                        </li>
+                    </Link>
+                    <Link to="/products" className='link'>
+                        <li className="sidebarListItem">
+                            <StorefrontOutlined className="sidebarIcon"/>
+                            Products
+                        </li>                
+                    </Link>
                     <li className="sidebarListItem">
                         <AttachMoneyOutlined className="sidebarIcon"/>
                         Transactions
