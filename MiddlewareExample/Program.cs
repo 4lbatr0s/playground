@@ -43,6 +43,19 @@ app.Map("/usingmapbranch", builder =>
     });
 });
 
+/*
+ INFO:app.MapWhen, does the same thing as app.Map but generally used with query params!
+    https://localhost:5001?testquerystring=test  Its gonna work with this query. 
+ */
+app.MapWhen(context => context.Request.Query.ContainsKey("testquerystring"), builder
+    =>
+{
+    builder.Run(async context =>
+    {
+        await context.Response.WriteAsync("Hello from the MapWhen branch.");
+    });
+});
+
 //INFO:Lets create our own Middleware
 app.Run(async context => //INFO: Run delegate accepts a  RequestDelegate parameter, RequestDelegate parameter accepts a HTTPContext parameter!
 {

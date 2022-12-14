@@ -1,0 +1,122 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/serhatoner/Coding/playground/Ultimate/LoggingService/LoggingService.csproj": {}
+  },
+  "projects": {
+    "/home/serhatoner/Coding/playground/Ultimate/Contracts/Contracts.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/serhatoner/Coding/playground/Ultimate/Contracts/Contracts.csproj",
+        "projectName": "Contracts",
+        "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Contracts/Contracts.csproj",
+        "packagesPath": "/home/serhatoner/.nuget/packages/",
+        "outputPath": "/home/serhatoner/Coding/playground/Ultimate/Contracts/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/serhatoner/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.111/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/serhatoner/Coding/playground/Ultimate/LoggingService/LoggingService.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/serhatoner/Coding/playground/Ultimate/LoggingService/LoggingService.csproj",
+        "projectName": "LoggingService",
+        "projectPath": "/home/serhatoner/Coding/playground/Ultimate/LoggingService/LoggingService.csproj",
+        "packagesPath": "/home/serhatoner/.nuget/packages/",
+        "outputPath": "/home/serhatoner/Coding/playground/Ultimate/LoggingService/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/serhatoner/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/serhatoner/Coding/playground/Ultimate/Contracts/Contracts.csproj": {
+                "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Contracts/Contracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "NLog.Extensions.Logging": {
+              "target": "Package",
+              "version": "[5.2.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.111/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

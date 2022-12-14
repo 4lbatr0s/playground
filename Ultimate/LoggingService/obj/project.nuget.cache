@@ -1,0 +1,20 @@
+{
+  "version": 2,
+  "dgSpecHash": "D2NcvrsIeMU8qzc3c9xuoYQh/0D+6NeVxj86poEM6TWN/rDapEJRxUkkeJhT2L4zFOLqOyU5+cMxODzslAgqvg==",
+  "success": true,
+  "projectFilePath": "/home/serhatoner/Coding/playground/Ultimate/LoggingService/LoggingService.csproj",
+  "expectedPackageFiles": [
+    "/home/serhatoner/.nuget/packages/microsoft.extensions.configuration.abstractions/6.0.0/microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.extensions.dependencyinjection/6.0.0/microsoft.extensions.dependencyinjection.6.0.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/6.0.0/microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.extensions.logging/6.0.0/microsoft.extensions.logging.6.0.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.extensions.logging.abstractions/6.0.0/microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.extensions.options/6.0.0/microsoft.extensions.options.6.0.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.extensions.primitives/6.0.0/microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/nlog/5.1.0/nlog.5.1.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/nlog.extensions.logging/5.2.0/nlog.extensions.logging.5.2.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/system.diagnostics.diagnosticsource/6.0.0/system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

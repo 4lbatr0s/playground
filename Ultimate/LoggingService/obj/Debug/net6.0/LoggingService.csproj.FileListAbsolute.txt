@@ -1,0 +1,15 @@
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/bin/Debug/net6.0/LoggingService.deps.json
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/bin/Debug/net6.0/LoggingService.dll
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/bin/Debug/net6.0/ref/LoggingService.dll
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/bin/Debug/net6.0/LoggingService.pdb
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/bin/Debug/net6.0/Contracts.dll
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/bin/Debug/net6.0/Contracts.pdb
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/obj/Debug/net6.0/LoggingService.csproj.AssemblyReference.cache
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/obj/Debug/net6.0/LoggingService.GeneratedMSBuildEditorConfig.editorconfig
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/obj/Debug/net6.0/LoggingService.AssemblyInfoInputs.cache
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/obj/Debug/net6.0/LoggingService.AssemblyInfo.cs
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/obj/Debug/net6.0/LoggingService.csproj.CoreCompileInputs.cache
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/obj/Debug/net6.0/LoggingService.csproj.CopyComplete
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/obj/Debug/net6.0/LoggingService.dll
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/obj/Debug/net6.0/ref/LoggingService.dll
+/home/serhatoner/Coding/playground/Ultimate/LoggingService/obj/Debug/net6.0/LoggingService.pdb
