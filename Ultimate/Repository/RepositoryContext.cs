@@ -11,7 +11,13 @@ public class RepositoryContext:DbContext
         
     }
 
-    public DbSet<Company>? Companies {get; set;}
+    //INFO: For database seeding!
+    protected override void OnModelCreating(ModelBuilder modelBuilder){
+        modelBuilder.ApplyConfiguration(new CompanyConfiguration());
+        modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
+    }
+
+    public DbSet<Company>? Companies {get; set;} //Migration Assemblies!
     public DbSet<Employee>? Employees {get; set;}
     
 }
