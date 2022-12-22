@@ -1,6 +1,5 @@
 /home/serhatoner/Coding/playground/Ultimate/Contracts/bin/Debug/net6.0/Contracts.deps.json
 /home/serhatoner/Coding/playground/Ultimate/Contracts/bin/Debug/net6.0/Contracts.dll
-/home/serhatoner/Coding/playground/Ultimate/Contracts/bin/Debug/net6.0/ref/Contracts.dll
 /home/serhatoner/Coding/playground/Ultimate/Contracts/bin/Debug/net6.0/Contracts.pdb
 /home/serhatoner/Coding/playground/Ultimate/Contracts/obj/Debug/net6.0/Contracts.csproj.AssemblyReference.cache
 /home/serhatoner/Coding/playground/Ultimate/Contracts/obj/Debug/net6.0/Contracts.GeneratedMSBuildEditorConfig.editorconfig
@@ -10,3 +9,4 @@
 /home/serhatoner/Coding/playground/Ultimate/Contracts/obj/Debug/net6.0/Contracts.dll
 /home/serhatoner/Coding/playground/Ultimate/Contracts/obj/Debug/net6.0/ref/Contracts.dll
 /home/serhatoner/Coding/playground/Ultimate/Contracts/obj/Debug/net6.0/Contracts.pdb
+/home/serhatoner/Coding/playground/Ultimate/Contracts/bin/Debug/net6.0/ref/Contracts.dll

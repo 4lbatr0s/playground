@@ -1,8 +1,10 @@
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 public class CompanyConfiguration : IEntityTypeConfiguration<Company>
-{    //INFO:To invoke this configuration, we have to change the RepositoryContext class
+{    
+    //INFO:To invoke this configuration, we have to change the RepositoryContext class
     public void Configure(EntityTypeBuilder<Company> builder)
     {
         builder.HasData

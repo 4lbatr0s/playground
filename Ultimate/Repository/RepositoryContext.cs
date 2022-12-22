@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-
+﻿using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 namespace Repository;
 
 //INFO: Context class is a middleware component that makes it possible to communicate with DB.

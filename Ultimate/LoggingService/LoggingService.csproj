@@ -10,6 +10,11 @@
     <ProjectReference Include="..\Contracts\Contracts.csproj" />
   </ItemGroup>
 
+   <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="NLog.Extensions.Logging" Version="5.2.0" />
   </ItemGroup>
