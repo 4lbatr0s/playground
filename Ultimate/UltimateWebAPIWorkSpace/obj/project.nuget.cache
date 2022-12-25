@@ -1,7 +1,7 @@
 {
   "version": 2,
-  "dgSpecHash": "Ine+g3jRvcArczyX/GqI21PNu474grcwYrfNHcNJRBFNfy7xNOttUJZFahBop/jzLlmDukRoEj9KUuqtvRHjPA==",
-  "success": true,
+  "dgSpecHash": "nOsJlpXNcC3wSeBGbShFFK6hoyZbZw94IrC3vb+5iHoq3/0RWd0t92y8LwpjLFAz88ZZnLckl1EsRBtK6yVfiA==",
+  "success": false,
   "projectFilePath": "/home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/UltimateWebAPIWorkSpace.csproj",
   "expectedPackageFiles": [
     "/home/serhatoner/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
@@ -34,5 +34,24 @@
     "/home/serhatoner/.nuget/packages/system.diagnostics.diagnosticsource/6.0.0/system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "NU1105",
+      "level": "Error",
+      "message": "Unable to find project information for '/home/serhatoner/Coding/playground/Ultimate/Service/Service.csproj'. If you are using Visual Studio, this may be because the project is unloaded or not part of the current solution so run a restore from the command-line. Otherwise, the project file may be invalid or missing targets required for restore.",
+      "libraryId": "/home/serhatoner/Coding/playground/Ultimate/Service/Service.csproj",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    },
+    {
+      "code": "NU1105",
+      "level": "Error",
+      "message": "Unable to find project information for '/home/serhatoner/Coding/playground/Ultimate/Service.Contracts/Service.Contracts.csproj'. If you are using Visual Studio, this may be because the project is unloaded or not part of the current solution so run a restore from the command-line. Otherwise, the project file may be invalid or missing targets required for restore.",
+      "libraryId": "/home/serhatoner/Coding/playground/Ultimate/Service.Contracts/Service.Contracts.csproj",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

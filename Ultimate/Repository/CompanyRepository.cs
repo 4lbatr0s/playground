@@ -1,6 +1,5 @@
 using Contracts;
 using Entities.Models;
-
 namespace Repository{
 
     //TODO: I'M AT PAGE 45 IN THE BOOK.
@@ -17,5 +16,7 @@ namespace Repository{
         {
             
         }
+
+
     }
 }

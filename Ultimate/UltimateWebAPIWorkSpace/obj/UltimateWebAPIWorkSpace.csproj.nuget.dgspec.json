@@ -43,7 +43,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -52,7 +53,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.111/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/current/sdk/6.0.404/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -157,7 +158,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -166,7 +168,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.111/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/current/sdk/6.0.404/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -259,6 +261,12 @@
               },
               "/home/serhatoner/Coding/playground/Ultimate/Repository/Repository.csproj": {
                 "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Repository/Repository.csproj"
+              },
+              "/home/serhatoner/Coding/playground/Ultimate/Service.Contracts/Service.Contracts.csproj": {
+                "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Service.Contracts/Service.Contracts.csproj"
+              },
+              "/home/serhatoner/Coding/playground/Ultimate/Service/Service.csproj": {
+                "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Service/Service.csproj"
               }
             }
           }
@@ -300,7 +308,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -312,7 +321,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.111/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/current/sdk/6.0.404/RuntimeIdentifierGraph.json"
         }
       }
     }
