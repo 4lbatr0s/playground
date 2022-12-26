@@ -9,4 +9,4 @@
 /home/serhatoner/Coding/playground/Ultimate/Entities/obj/Debug/net6.0/Entities.dll
 /home/serhatoner/Coding/playground/Ultimate/Entities/obj/Debug/net6.0/ref/Entities.dll
 /home/serhatoner/Coding/playground/Ultimate/Entities/obj/Debug/net6.0/Entities.pdb
-/home/serhatoner/Coding/playground/Ultimate/Entities/bin/Debug/net6.0/ref/Entities.dll
+/home/serhatoner/Coding/playground/Ultimate/Entities/obj/Debug/net6.0/refint/Entities.dll

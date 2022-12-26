@@ -1,3 +1,6 @@
+using AutoMapper;
+using Contracts;
+
 namespace Service;
 using Service.Contracts;
 
@@ -6,19 +9,19 @@ using Service.Contracts;
     Here, as we did with the RepositoryManager class, we are utilizing the
     Lazy class to ensure the lazy initialization of our services.
 
-    Again, we should introduce our ServiceManager class to our ServiceExtension.cs file.
+    TIP:Again, we should introduce our ServiceManager class to our ServiceExtension.cs file.
 */
-internal sealed class ServiceManager : IServiceManager
+public sealed class ServiceManager : IServiceManager
 {
     private readonly Lazy<ICompanyService> _companyService;
     private readonly Lazy<IEmployeeService> _employeeService;
 
-    public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager loggerManager)
+    public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager loggerManager, IMapper mapper)
     {
-        _companyService = new Lazy<ICompanyService>(() => new CompanyService(repositoryManager, loggerManager));
-        _employeeService = new Lazy<IEmployeeService>(() => new EmployeeService(repositoryManager, loggerManager));
+        _companyService = new Lazy<ICompanyService>(() => new CompanyService(loggerManager, repositoryManager, mapper));
+        _employeeService = new Lazy<IEmployeeService>(() => new EmployeeService(loggerManager, repositoryManager, mapper));
     }
 
-    public ICompanyService CompanyService => _companyService.Value;
-    public IEmployeeService EmployeeService => _employeeService.Value;
+    public ICompanyService Company => _companyService.Value;
+    public IEmployeeService Employee => _employeeService.Value;
 }

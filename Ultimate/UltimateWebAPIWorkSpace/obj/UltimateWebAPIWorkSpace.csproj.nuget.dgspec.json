@@ -25,7 +25,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/home/serhatoner/Coding/playground/Ultimate/Entities/Entities.csproj": {
+                "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Entities/Entities.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -53,7 +57,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/current/sdk/6.0.404/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.404/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -96,7 +100,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -105,7 +110,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.111/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.404/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -168,7 +173,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/current/sdk/6.0.404/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.404/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -194,6 +199,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "/home/serhatoner/Coding/playground/Ultimate/Contracts/Contracts.csproj": {
+                "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Contracts/Contracts.csproj"
+              },
               "/home/serhatoner/Coding/playground/Ultimate/Entities/Entities.csproj": {
                 "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Entities/Entities.csproj"
               }
@@ -221,7 +229,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -230,7 +239,196 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/6.0.111/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.404/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/serhatoner/Coding/playground/Ultimate/Service.Contracts/Service.Contracts.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/serhatoner/Coding/playground/Ultimate/Service.Contracts/Service.Contracts.csproj",
+        "projectName": "Service.Contracts",
+        "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Service.Contracts/Service.Contracts.csproj",
+        "packagesPath": "/home/serhatoner/.nuget/packages/",
+        "outputPath": "/home/serhatoner/Coding/playground/Ultimate/Service.Contracts/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/serhatoner/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/serhatoner/Coding/playground/Ultimate/Entities/Entities.csproj": {
+                "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Entities/Entities.csproj"
+              },
+              "/home/serhatoner/RiderProjects/UltimateProject/Shared/Shared.csproj": {
+                "projectPath": "/home/serhatoner/RiderProjects/UltimateProject/Shared/Shared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.404/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/serhatoner/Coding/playground/Ultimate/Service/Service.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/serhatoner/Coding/playground/Ultimate/Service/Service.csproj",
+        "projectName": "Service",
+        "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Service/Service.csproj",
+        "packagesPath": "/home/serhatoner/.nuget/packages/",
+        "outputPath": "/home/serhatoner/Coding/playground/Ultimate/Service/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/serhatoner/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/serhatoner/Coding/playground/Ultimate/Contracts/Contracts.csproj": {
+                "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Contracts/Contracts.csproj"
+              },
+              "/home/serhatoner/Coding/playground/Ultimate/Service.Contracts/Service.Contracts.csproj": {
+                "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Service.Contracts/Service.Contracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.404/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/serhatoner/Coding/playground/Ultimate/Ultimate.Presentation/Ultimate.Presentation.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/serhatoner/Coding/playground/Ultimate/Ultimate.Presentation/Ultimate.Presentation.csproj",
+        "projectName": "Ultimate.Presentation",
+        "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Ultimate.Presentation/Ultimate.Presentation.csproj",
+        "packagesPath": "/home/serhatoner/.nuget/packages/",
+        "outputPath": "/home/serhatoner/Coding/playground/Ultimate/Ultimate.Presentation/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/serhatoner/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "/home/serhatoner/Coding/playground/Ultimate/Service.Contracts/Service.Contracts.csproj": {
+                "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Service.Contracts/Service.Contracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.404/RuntimeIdentifierGraph.json"
         }
       }
     },
@@ -267,6 +465,9 @@
               },
               "/home/serhatoner/Coding/playground/Ultimate/Service/Service.csproj": {
                 "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Service/Service.csproj"
+              },
+              "/home/serhatoner/Coding/playground/Ultimate/Ultimate.Presentation/Ultimate.Presentation.csproj": {
+                "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Ultimate.Presentation/Ultimate.Presentation.csproj"
               }
             }
           }
@@ -321,7 +522,60 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/current/sdk/6.0.404/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.404/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/serhatoner/RiderProjects/UltimateProject/Shared/Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/serhatoner/RiderProjects/UltimateProject/Shared/Shared.csproj",
+        "projectName": "Shared",
+        "projectPath": "/home/serhatoner/RiderProjects/UltimateProject/Shared/Shared.csproj",
+        "packagesPath": "/home/serhatoner/.nuget/packages/",
+        "outputPath": "/home/serhatoner/RiderProjects/UltimateProject/Shared/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/serhatoner/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.404/RuntimeIdentifierGraph.json"
         }
       }
     }

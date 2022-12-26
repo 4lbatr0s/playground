@@ -2,8 +2,7 @@ using Contracts;
 using Entities.Models;
 namespace Repository{
 
-    //TODO: I'M AT PAGE 45 IN THE BOOK.
-    public class CompanyRepository : RepositoryBase<Company>, ICompanyRepository
+    internal sealed class CompanyRepository : RepositoryBase<Company>, ICompanyRepository
     {
         /*
             INFO:  How to implement RepositoryContext: 
@@ -17,6 +16,12 @@ namespace Repository{
             
         }
 
-
+        //INFO: We implements RepositoryBases' FindAll funtion under a different function name, then we will call this from service.
+        public IEnumerable<Company> GetAllCompanies(bool trackChanges)
+        {
+            return FindAll(trackChanges)
+                .OrderBy(c => c.Name)
+                .ToList();
+        }
     }
 }
