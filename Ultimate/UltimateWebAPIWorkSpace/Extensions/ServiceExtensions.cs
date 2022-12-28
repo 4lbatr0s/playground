@@ -1,12 +1,9 @@
-using System;
 using Contracts;
 using LoggingService;
 using Repository;
 using Service;
 using Service.Contracts;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Design;
-using Repository;
 
 /**
  * INFO:We will use this class to introduce our services to Program.cs file.

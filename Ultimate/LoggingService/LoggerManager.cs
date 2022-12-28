@@ -1,7 +1,6 @@
 using Contracts;
 using NLog;
 namespace LoggingService;
-
 public class LoggerManager:ILoggerManager
 {
     private static ILogger logger = LogManager.GetCurrentClassLogger(); //INFO: Comes from nlog.

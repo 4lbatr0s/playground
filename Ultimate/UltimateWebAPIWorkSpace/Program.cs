@@ -1,9 +1,10 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using UltimateWebAPIWorkSpace.Extensions;
 using NLog;
+using Contracts;
 /**
- * INFO:builder helps us to add Configurations, Services, Loggin Configurations, IHostBuilder and IWebHostBuilder 
- */
+* INFO:builder helps us to add Configurations, Services, Loggin Configurations, IHostBuilder and IWebHostBuilder 
+*/
 var builder = WebApplication.CreateBuilder(args);
 
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));//INFO: Get the logging configs.
@@ -25,11 +26,13 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build(); //INFO:Equivalent of the Configure method in NET5. It's literally our web application instance.
 
+var logger = app.Services.GetRequiredService<ILoggerManager>(); //TIP: You should import it after builder.Build, Builder registers the IoCs.
+app.ConfigureExceptionHandler(logger); //Global Exception handler.
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();//TIP:Mandatory, use it.
+    // app.UseDeveloperExceptionPage();//TIP:Mandatory, use it, UPDATE: no need to use after Global Error Handling.
     app.UseSwagger();
     app.UseSwaggerUI();
 }

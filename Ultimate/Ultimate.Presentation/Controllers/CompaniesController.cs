@@ -18,15 +18,10 @@ namespace Ultimate.Presentation.Controllers
         [HttpGet] //TIP: route of this action will be api/companies.
         public IActionResult GetCompanies()
         {
-            try
-            {
+                //testing the global exception:
+                throw new Exception("Exception");
                 var companies=  _serviceManager.Company.GetAllCompanies(trackChanges:false);
                 return Ok(companies);
-            }
-            catch (Exception e)
-            {
-                return StatusCode(500, "Internal server error");
-            }
         }
     }
 }

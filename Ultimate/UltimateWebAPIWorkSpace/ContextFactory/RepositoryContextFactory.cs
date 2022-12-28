@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Repository;
-
+namespace UltimateWebAPIWorkSpace.ContextFactory;
 
 //INFO: EntityFrameworkCore.Desing is installed to use IDesignTimeDbContextFactory
 public class RepositoryContextFactory : IDesignTimeDbContextFactory<RepositoryContext>
