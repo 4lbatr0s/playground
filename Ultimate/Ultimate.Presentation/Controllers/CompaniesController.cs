@@ -5,7 +5,7 @@ namespace Ultimate.Presentation.Controllers
 {
     [Route("api/companies")] //TIP: Best practice, always use name in the route!
     [ApiController]
-    public class CompaniesController:ControllerBase
+    public class CompaniesController : ControllerBase
     {
         private readonly IServiceManager _serviceManager;
 
@@ -18,10 +18,17 @@ namespace Ultimate.Presentation.Controllers
         [HttpGet] //TIP: route of this action will be api/companies.
         public IActionResult GetCompanies()
         {
-                //testing the global exception:
-                throw new Exception("Exception");
-                var companies=  _serviceManager.Company.GetAllCompanies(trackChanges:false);
-                return Ok(companies);
+            //testing the global exception:
+            // throw new Exception("Exception");
+            var companies = _serviceManager.CompanyService.GetAllCompanies(trackChanges: false);
+            return Ok(companies);
+        }
+
+        [HttpGet("{id:guid}")]//INFO: Our path is api/companies/id, our id's type is GUID!
+        public IActionResult GetCompany(Guid id)
+        {
+            var company = _serviceManager.CompanyService.GetCompany(id, trackChanges: false);
+            return Ok(company);
         }
     }
 }

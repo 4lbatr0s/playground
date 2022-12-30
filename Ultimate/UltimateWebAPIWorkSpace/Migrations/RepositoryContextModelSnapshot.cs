@@ -10,6 +10,8 @@ using Repository;
 
 namespace UltimateWebAPIWorkSpace.Migrations
 {
+
+    //INFO: How to CREATE SNAPSHOT!
     [DbContext(typeof(RepositoryContext))]
     partial class RepositoryContextModelSnapshot : ModelSnapshot
     {

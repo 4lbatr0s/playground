@@ -1,6 +1,7 @@
 using Contracts;
 using Entities.Models;
-namespace Repository{
+namespace Repository
+{
 
     internal sealed class CompanyRepository : RepositoryBase<Company>, ICompanyRepository
     {
@@ -11,9 +12,9 @@ namespace Repository{
                 : base(repositoryContext) means go to RepositoryBase class, execute the Constructor that takes single parameter with type RepositoryContext
 
         */
-        public CompanyRepository(RepositoryContext repositoryContext) : base(repositoryContext) 
+        public CompanyRepository(RepositoryContext repositoryContext) : base(repositoryContext)
         {
-            
+
         }
 
         //INFO: We implements RepositoryBases' FindAll funtion under a different function name, then we will call this from service.
@@ -23,5 +24,9 @@ namespace Repository{
                 .OrderBy(c => c.Name)
                 .ToList();
         }
+
+        public Company GetCompany(Guid companyId, bool trackChanges) =>
+        FindByCondition(c => c.Id.Equals(companyId), trackChanges)
+        .SingleOrDefault();
     }
 }

@@ -1617,7 +1617,8 @@
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
           "Contracts": "1.0.0",
-          "Service.Contracts": "1.0.0"
+          "Service.Contracts": "1.0.0",
+          "Shared": "1.0.0"
         },
         "compile": {
           "bin/placeholder/Service.dll": {}
@@ -1630,7 +1631,6 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
-          "Entities": "1.0.0",
           "Shared": "1.0.0"
         },
         "compile": {
@@ -4952,8 +4952,8 @@
     },
     "Shared/1.0.0": {
       "type": "project",
-      "path": "../../../../RiderProjects/UltimateProject/Shared/Shared.csproj",
-      "msbuildProject": "../../../../RiderProjects/UltimateProject/Shared/Shared.csproj"
+      "path": "../Shared/Shared.csproj",
+      "msbuildProject": "../Shared/Shared.csproj"
     },
     "Ultimate.Presentation/1.0.0": {
       "type": "project",
@@ -4970,6 +4970,7 @@
       "Repository >= 1.0.0",
       "Service >= 1.0.0",
       "Service.Contracts >= 1.0.0",
+      "Shared >= 1.0.0",
       "Swashbuckle.AspNetCore >= 6.2.3",
       "Ultimate.Presentation >= 1.0.0"
     ]
@@ -5010,6 +5011,9 @@
             },
             "/home/serhatoner/Coding/playground/Ultimate/Service/Service.csproj": {
               "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Service/Service.csproj"
+            },
+            "/home/serhatoner/Coding/playground/Ultimate/Shared/Shared.csproj": {
+              "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Shared/Shared.csproj"
             },
             "/home/serhatoner/Coding/playground/Ultimate/Ultimate.Presentation/Ultimate.Presentation.csproj": {
               "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Ultimate.Presentation/Ultimate.Presentation.csproj"

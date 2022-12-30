@@ -4,6 +4,9 @@ using Entities.Models;
 using Shared.DataTransferObjects;
 
 namespace Service;
+
+using System;
+using Entities.Exceptions;
 using Service.Contracts;
 
 internal sealed class CompanyService:ICompanyService
@@ -25,5 +28,14 @@ internal sealed class CompanyService:ICompanyService
             var companies = _repository.Company.GetAllCompanies(trackChanges);
             var companyDtos = _mapper.Map<IEnumerable<CompanyDto>>(companies); //INFO: Destination => Resource, opposite of Mapping Profile!
             return companyDtos;
+    }
+
+    public CompanyDto GetCompany(Guid companyId, bool trackChanges)
+    {
+        var company = _repository.Company.GetCompany(companyId, trackChanges);
+        if(company is null)
+            throw new CompanyNotFoundException(companyId); //INFO: Our Custom exceptions works with the Global Exception Handler.
+        var companyDto = _mapper.Map<CompanyDto>(company);
+        return companyDto;
     }
 }

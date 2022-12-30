@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 {
-    //INFO:To invoke this configuration, we have to change the RepositoryContextclass
+    //INFO:To invoke this configuration, we have to change the RepositoryContextClass
     public void Configure(EntityTypeBuilder<Employee> builder)
     {
         builder.HasData
