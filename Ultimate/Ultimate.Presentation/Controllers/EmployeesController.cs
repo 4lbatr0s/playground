@@ -21,6 +21,18 @@ namespace Ultimate.Presentation.Controllers
             false);
             return Ok(employees);
         }
+
+
+        [HttpGet("{id:guid}")]
+        public IActionResult GetEmployeeForCompany(Guid companyId, Guid id)
+        {
+            var employee = _serviceManager.EmployeeService.GetEmployee(companyId, id,
+            trackChanges: false);
+            return Ok(employee);
+        }
+
+        
+
     }
 
 

@@ -4,6 +4,7 @@ using Repository;
 using Service;
 using Service.Contracts;
 using Microsoft.EntityFrameworkCore;
+using UltimateWebAPIWorkSpace.Formatters.Csv;
 
 /**
  * INFO:We will use this class to introduce our services to Program.cs file.
@@ -43,4 +44,8 @@ public static class ServiceExtensions
     services.AddDbContext<RepositoryContext>(opts =>
         opts.UseNpgsql(configuration.GetConnectionString("PostgreSQLConnection"))
     );
+
+    //INFO: For adding Formatters (Content Negotiation), add it to Controllers in Program.cs
+    public static IMvcBuilder AddCustomCSVFormatter(this IMvcBuilder builder) =>
+    builder.AddMvcOptions(config => config.OutputFormatters.Add(new CsvOutputFormatter()));
 }

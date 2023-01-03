@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="/home/serhatoner/Coding/playground/Ultimate/Shared/Shared.csproj" />
     <ProjectReference Include="Entities/Entities.csproj" />
+    <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 
 </Project>

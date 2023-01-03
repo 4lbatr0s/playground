@@ -15,8 +15,14 @@ builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
-builder.Services.AddControllers()
-    .AddApplicationPart(typeof(Ultimate.Presentation.AssemblyReference).Assembly); //INFO: To use Controllers inside the Ultimate.Presentation.
+builder.Services.AddControllers(config => {
+    config.RespectBrowserAcceptHeader = true;//INFO: Helps us with Content Negotiation
+    config.ReturnHttpNotAcceptable = true;//INFO: to restrict the client from requesting unsupported media types.
+})
+.AddXmlDataContractSerializerFormatters()
+.AddCustomCSVFormatter() //INFO: to implement a custom csv formatter.
+.AddApplicationPart(typeof(Ultimate.Presentation.AssemblyReference).Assembly); //INFO: To use Controllers inside the Ultimate.Presentation.
+
 builder.Services.ConfigureSqlContext(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddAutoMapper(typeof(Program));//INFO: Automapper.
