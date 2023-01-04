@@ -17,6 +17,11 @@ namespace Repository
 
         }
 
+        public void CreateCompany(Company company)
+        {
+            Create(company);//INFO: comes from RepositoryBase.
+        }
+
         //INFO: We implements RepositoryBases' FindAll funtion under a different function name, then we will call this from service.
         public IEnumerable<Company> GetAllCompanies(bool trackChanges)
         {

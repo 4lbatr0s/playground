@@ -8,6 +8,7 @@ namespace Service;
 using System;
 using Entities.Exceptions;
 using Service.Contracts;
+using Shared.DataTransferObjects.Exceptions;
 
 internal sealed class CompanyService:ICompanyService
 {
@@ -19,6 +20,17 @@ internal sealed class CompanyService:ICompanyService
         _logger = logger;
         _repository = repository;
         _mapper = mapper;
+    }
+
+    public CompanyDto CreateCompany(CompanyForCreationDto company)
+    {
+        if(company is null)
+            throw new CompanyForCreationDtoIsNullException();
+        var companyEntity = _mapper.Map<Company>(company);
+        _repository.Company.CreateCompany(companyEntity);
+        _repository.Save();
+        var companyToReturn = _mapper.Map<CompanyDto>(companyEntity);
+        return companyToReturn;
     }
 
     //INFO: Getting all entities from DB IS A BAD IDEA!

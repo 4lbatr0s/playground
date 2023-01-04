@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.HttpOverrides;
 using UltimateWebAPIWorkSpace.Extensions;
 using NLog;
 using Contracts;
+using Microsoft.AspNetCore.Mvc;
 /**
 * INFO:builder helps us to add Configurations, Services, Loggin Configurations, IHostBuilder and IWebHostBuilder 
 */
@@ -15,6 +16,13 @@ builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
+
+// INFO:With this, we are suppressing a default model state validation that is
+// implemented due to the existence of the [ApiController] attribute in
+// all API controllers:
+builder.Services.Configure<ApiBehaviorOptions>(options => {
+    options.SuppressModelStateInvalidFilter = true;  
+});
 builder.Services.AddControllers(config => {
     config.RespectBrowserAcceptHeader = true;//INFO: Helps us with Content Negotiation
     config.ReturnHttpNotAcceptable = true;//INFO: to restrict the client from requesting unsupported media types.
