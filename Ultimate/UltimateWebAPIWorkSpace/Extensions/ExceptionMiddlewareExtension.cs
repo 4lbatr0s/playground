@@ -1,6 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using Contracts;
+using Entities.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Models.ErrorModel;
 
@@ -22,8 +23,16 @@ public static class ExceptionMiddlewareExtension
                 context.Response.ContentType = "application/json";
 
                 var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+
                 if (contextFeature != null)
                 {
+                    //INFO: For collection, if we send bad request, return bad request not 500 internal server error.
+                    context.Response.StatusCode = contextFeature.Error switch
+                    {
+                        NotFoundException => StatusCodes.Status404NotFound,
+                        BadRequestException => StatusCodes.Status400BadRequest,
+                        _ => StatusCodes.Status500InternalServerError
+                    };
                     logger.LogError($"Something went wrong: {contextFeature.Error}");
 
                     await context.Response.WriteAsync(new ErrorDetail()

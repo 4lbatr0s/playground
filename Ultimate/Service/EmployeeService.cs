@@ -4,6 +4,7 @@ using Entities.Exceptions;
 using Entities.Models;
 using Service.Contracts;
 using Shared.DataTransferObjects;
+using Shared.DataTransferObjects.Exceptions;
 
 namespace Service;
 
@@ -17,6 +18,21 @@ internal sealed class EmployeeService:IEmployeeService
         _logger = logger;
         _repository = repository;
         _mapper = mapper;
+    }
+
+    public EmployeeDto CreateEmployeeForCompany(Guid companyId, EmployeForCreationDto employee, bool trackChanges)
+    {
+        var company = _repository.Company.GetCompany(companyId, trackChanges);
+        if (company is null)
+            throw new CompanyNotFoundException(companyId);
+        if (employee is null)
+            throw new EmployeeForCreationDtoIsNullException();
+        var employeeEntity = _mapper.Map<Employee>(employee);
+        _repository.Employee.CreateEmployeeForCompany(companyId, employeeEntity);
+        _repository.Save();
+        var employeeToReturn = _mapper.Map<EmployeeDto>(employeeEntity);
+        return employeeToReturn;
+
     }
 
     public Employee GetEmployee(Guid companyId, Guid employeeId, bool trackChanges)

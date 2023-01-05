@@ -6,5 +6,5 @@ public interface IEmployeeService
 {
     IEnumerable<EmployeeDto> GetEmployees(Guid companyId, bool trackChanges);
     Employee GetEmployee(Guid companyId, Guid employeeId, bool trackChanges);
-
+    EmployeeDto CreateEmployeeForCompany(Guid companyId, EmployeForCreationDto employee, bool trackChanges);
 }

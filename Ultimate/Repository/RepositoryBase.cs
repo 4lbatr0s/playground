@@ -29,7 +29,7 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
 
     }
 
-    public void Create(T entity) => RepositoryContext.Set<T>().Add(entity);
+    public void Create(T entity) => RepositoryContext.Set<T>().Add(entity); //TIP: set repository to T type, and add entitity to this type of resource.
     public void Update(T entity) => RepositoryContext.Set<T>().Update(entity);
     public void Delete(T entity) => RepositoryContext.Set<T>().Remove(entity);
 }
