@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
+using Ultimate.Presentation.ModelBinders;
 
 namespace Ultimate.Presentation.Controllers
 {
@@ -43,8 +44,9 @@ namespace Ultimate.Presentation.Controllers
 
 
         //INFO: How to return a collection of items!
+        //INFO: we have created a ModelBinding and used it on GetCompanyCollection, because we are obligated to send our ids as String.
         [HttpGet("collection/{ids}", Name = "CompanyCollection")]
-        public IActionResult GetCompanyCollection(IEnumerable<Guid> ids)
+        public IActionResult GetCompanyCollection([ModelBinder(BinderType=typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
         {
             var companies = _serviceManager.CompanyService.GetByIds(ids, trackChanges:false);
             return Ok(companies);

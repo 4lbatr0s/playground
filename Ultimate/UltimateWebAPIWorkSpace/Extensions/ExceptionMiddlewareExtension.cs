@@ -19,7 +19,7 @@ public static class ExceptionMiddlewareExtension
             //INFO: Run is used on the terminal middlewares,        
             appError.Run(async context => //TIP:appError is an action of IApplicationBuilder type.
             {
-                context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+                // context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
                 context.Response.ContentType = "application/json";
 
                 var contextFeature = context.Features.Get<IExceptionHandlerFeature>();

@@ -33,24 +33,7 @@ internal sealed class CompanyService:ICompanyService
         return companyToReturn;
     }
 
-    //INFO: HOW TO CREATE A COLLECTION SERVICE!
-    public (IEnumerable<CompanyDto> companies, string ids) CreateCompanyCollection(IEnumerable<CompanyForCreationDto> companyCollection)
-    {
-        if(companyCollection is null)
-            throw new CompanyCollectionBadRequest();
-        var companyEntities = _mapper.Map<IEnumerable<Company>>(companyCollection); //Get from client and sent it to repo.
-        foreach (var company in companyEntities) //TIP: create each company individually.
-        {
-            _repository.Company.CreateCompany(company);
-        }
-        _repository.Save();
 
-        //Get its and dtos.
-        var companyCollectionToReturn = _mapper.Map<IEnumerable<CompanyDto>>(companyEntities);
-        var ids = string.Join(",", companyCollectionToReturn.Select(c=>c.Id));  
-        
-        return (companies:companyCollectionToReturn, ids:ids); //TIP: How to return dynamic object.
-    }
 
     //INFO: Getting all entities from DB IS A BAD IDEA!
     public IEnumerable<CompanyDto> GetAllCompanies(bool trackChanges)
@@ -71,6 +54,25 @@ internal sealed class CompanyService:ICompanyService
             throw new CollectionByIdsBadRequestException();
         var companiesToReturn = _mapper.Map<IEnumerable<CompanyDto>>(companyEntities);
         return companiesToReturn;
+    }
+
+        //INFO: HOW TO CREATE A COLLECTION SERVICE!
+    public (IEnumerable<CompanyDto> companies, string ids) CreateCompanyCollection(IEnumerable<CompanyForCreationDto> companyCollection)
+    {
+        if(companyCollection is null)
+            throw new CompanyCollectionBadRequest();
+        var companyEntities = _mapper.Map<IEnumerable<Company>>(companyCollection); //Get from client and sent it to repo.
+        foreach (var company in companyEntities) //TIP: create each company individually.
+        {
+            _repository.Company.CreateCompany(company);
+        }
+        _repository.Save();
+
+        //Get its and dtos.
+        var companyCollectionToReturn = _mapper.Map<IEnumerable<CompanyDto>>(companyEntities);
+        var ids = string.Join(",", companyCollectionToReturn.Select(c=>c.Id));  
+        
+        return (companies:companyCollectionToReturn, ids:ids); //TIP: How to return dynamic object.
     }
 
     public CompanyDto GetCompany(Guid companyId, bool trackChanges)
