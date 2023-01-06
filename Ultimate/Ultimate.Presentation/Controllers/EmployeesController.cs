@@ -4,6 +4,7 @@ using Shared.DataTransferObjects;
 
 namespace Ultimate.Presentation.Controllers
 {
+    //INFO: when we do companyId here, our Actions' companyId binds with this.
     [Route("api/companies/{companyId}/employees")] //INFO: How to PARENT/CHILD relationships in WEB API
     [ApiController]
     public class EmployeesContontroller : ControllerBase
@@ -24,7 +25,7 @@ namespace Ultimate.Presentation.Controllers
         }
 
 
-        [HttpGet("{id:guid}", Name=nameof(GetEmployeeForCompany))]
+        [HttpGet("{id:guid}", Name = nameof(GetEmployeeForCompany))]
         public IActionResult GetEmployeeForCompany(Guid companyId, Guid id)
         {
             var employee = _serviceManager.EmployeeService.GetEmployee(companyId, id,
@@ -36,11 +37,16 @@ namespace Ultimate.Presentation.Controllers
         [HttpPost]
         public IActionResult CreateEmployeeForCompany(Guid companyId, [FromBody] EmployeForCreationDto employeForCreationDto)
         {
-            var employeeToReturn = _serviceManager.EmployeeService.CreateEmployeeForCompany(companyId, employeForCreationDto, trackChanges:false);
-            return CreatedAtRoute("GetEmployeeForCompany", new {companyId, id = employeeToReturn.Id}, employeeToReturn);
+            var employeeToReturn = _serviceManager.EmployeeService.CreateEmployeeForCompany(companyId, employeForCreationDto, trackChanges: false);
+            return CreatedAtRoute("GetEmployeeForCompany", new { companyId, id = employeeToReturn.Id }, employeeToReturn);
         }
 
-        
+        [HttpDelete("{id:guid}")]
+        public IActionResult DeleteEmployeeForCompany(Guid companyId, Guid id)
+        {
+            _serviceManager.EmployeeService.DeleteEmployeeForCompany(companyId, id, trackChanges:false);
+            return NoContent();
+        }
 
     }
 

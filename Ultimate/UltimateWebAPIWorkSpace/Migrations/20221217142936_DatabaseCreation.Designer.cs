@@ -85,7 +85,7 @@ namespace UltimateWebAPIWorkSpace.Migrations
                     b.HasOne("Company", "Company")
                         .WithMany("Employees")
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Cascade) //TIP: With the basic configuration, cascade deleting is enabled, which means deleting a parent resource will automatically delete all of its children.
                         .IsRequired();
 
                     b.Navigation("Company");

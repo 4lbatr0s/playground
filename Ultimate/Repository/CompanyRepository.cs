@@ -22,6 +22,8 @@ namespace Repository
             Create(company);//INFO: comes from RepositoryBase.
         }
 
+        public void DeleteCompany(Company company) => Delete(company);
+
         //INFO: We implements RepositoryBases' FindAll funtion under a different function name, then we will call this from service.
         public IEnumerable<Company> GetAllCompanies(bool trackChanges)
         {

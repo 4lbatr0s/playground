@@ -10,7 +10,7 @@ using Entities.Exceptions;
 using Service.Contracts;
 using Shared.DataTransferObjects.Exceptions;
 
-internal sealed class CompanyService:ICompanyService
+internal sealed class CompanyService : ICompanyService
 {
     private readonly IRepositoryManager _repository;//INFO: RepositoryManager.cs 
     private readonly ILoggerManager _logger;
@@ -24,7 +24,7 @@ internal sealed class CompanyService:ICompanyService
 
     public CompanyDto CreateCompany(CompanyForCreationDto company)
     {
-        if(company is null)
+        if (company is null)
             throw new CompanyForCreationDtoIsNullException();
         var companyEntity = _mapper.Map<Company>(company);
         _repository.Company.CreateCompany(companyEntity);
@@ -39,15 +39,15 @@ internal sealed class CompanyService:ICompanyService
     public IEnumerable<CompanyDto> GetAllCompanies(bool trackChanges)
     { //INFO: We use try catch here not in the Controller!
 
-            var companies = _repository.Company.GetAllCompanies(trackChanges);
-            var companyDtos = _mapper.Map<IEnumerable<CompanyDto>>(companies); //INFO: Destination => Resource, opposite of Mapping Profile!
-            return companyDtos;
+        var companies = _repository.Company.GetAllCompanies(trackChanges);
+        var companyDtos = _mapper.Map<IEnumerable<CompanyDto>>(companies); //INFO: Destination => Resource, opposite of Mapping Profile!
+        return companyDtos;
     }
 
     //INFO: HOW TO GET A COLLECTION OF ITEMS
     public IEnumerable<CompanyDto> GetByIds(IEnumerable<Guid> ids, bool trackChanges)
     {
-        if(ids is null)
+        if (ids is null)
             throw new IdParametersBadRequestException();
         var companyEntities = _repository.Company.GetByIds(ids, trackChanges);
         if (ids.Count() != companyEntities.Count())
@@ -56,10 +56,10 @@ internal sealed class CompanyService:ICompanyService
         return companiesToReturn;
     }
 
-        //INFO: HOW TO CREATE A COLLECTION SERVICE!
+    //INFO: HOW TO CREATE A COLLECTION SERVICE!
     public (IEnumerable<CompanyDto> companies, string ids) CreateCompanyCollection(IEnumerable<CompanyForCreationDto> companyCollection)
     {
-        if(companyCollection is null)
+        if (companyCollection is null)
             throw new CompanyCollectionBadRequest();
         var companyEntities = _mapper.Map<IEnumerable<Company>>(companyCollection); //Get from client and sent it to repo.
         foreach (var company in companyEntities) //TIP: create each company individually.
@@ -70,17 +70,26 @@ internal sealed class CompanyService:ICompanyService
 
         //Get its and dtos.
         var companyCollectionToReturn = _mapper.Map<IEnumerable<CompanyDto>>(companyEntities);
-        var ids = string.Join(",", companyCollectionToReturn.Select(c=>c.Id));  
-        
-        return (companies:companyCollectionToReturn, ids:ids); //TIP: How to return dynamic object.
+        var ids = string.Join(",", companyCollectionToReturn.Select(c => c.Id));
+
+        return (companies: companyCollectionToReturn, ids: ids); //TIP: How to return dynamic object.
     }
 
     public CompanyDto GetCompany(Guid companyId, bool trackChanges)
     {
         var company = _repository.Company.GetCompany(companyId, trackChanges);
-        if(company is null)
+        if (company is null)
             throw new CompanyNotFoundException(companyId); //INFO: Our Custom exceptions works with the Global Exception Handler.
         var companyDto = _mapper.Map<CompanyDto>(company);
         return companyDto;
+    }
+
+    public void DeleteCompany(Guid companyId, bool trackChanges)
+    {
+        var company = _repository.Company.GetCompany(companyId, trackChanges);
+        if (company is null)
+            throw new CompanyNotFoundException(companyId); //INFO: Our Custom exceptions works with the Global Exception Handler.
+        _repository.Company.DeleteCompany(company);
+        _repository.Save();
     }
 }

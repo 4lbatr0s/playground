@@ -15,6 +15,8 @@ namespace Repository{
             Create(employee);
         }
 
+        public void DeleteEmployee(Employee employee) => Delete(employee);
+
         public Employee GetEmployee(Guid companyId, Guid employeeId, bool trackChanges)
         {
             //TIP: SingleOrDefault: returns only element, if not returns null, if more than 1, throws exception.

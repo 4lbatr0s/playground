@@ -1,3 +1,4 @@
+using System.Security.Cryptography.X509Certificates;
 using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
@@ -33,6 +34,18 @@ internal sealed class EmployeeService:IEmployeeService
         var employeeToReturn = _mapper.Map<EmployeeDto>(employeeEntity);
         return employeeToReturn;
 
+    }
+
+    public void DeleteEmployeeForCompany(Guid companyId, Guid employeeId, bool trackChanges)
+    {
+        var company = _repository.Company.GetCompany(companyId, trackChanges);
+        if (company is null)
+            throw new CompanyNotFoundException(companyId);
+        var employeeEntity = _repository.Employee.GetEmployee(companyId, employeeId, trackChanges);
+        if (employeeEntity is null)
+            throw new EmployeeNotFoundException(employeeId);
+        _repository.Employee.DeleteEmployee(employeeEntity);
+        _repository.Save();
     }
 
     public Employee GetEmployee(Guid companyId, Guid employeeId, bool trackChanges)

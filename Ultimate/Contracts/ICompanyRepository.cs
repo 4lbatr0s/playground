@@ -12,7 +12,7 @@ namespace Contracts
         
         void CreateCompany(Company company); //INFO: give company as parameter.
 
-        
+        void DeleteCompany(Company company);//INFO: Its cascade, it will delete the children objects.
     }
 }
 
