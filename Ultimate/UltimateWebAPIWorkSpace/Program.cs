@@ -1,12 +1,15 @@
-using Microsoft.AspNetCore.HttpOverrides;
-using UltimateWebAPIWorkSpace.Extensions;
-using NLog;
 using Contracts;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using NLog;
+using UltimateWebAPIWorkSpace.Extensions;
 /**
 * INFO:builder helps us to add Configurations, Services, Loggin Configurations, IHostBuilder and IWebHostBuilder 
 */
 var builder = WebApplication.CreateBuilder(args);
+ 
 
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));//INFO: Get the logging configs.
 
@@ -26,6 +29,7 @@ builder.Services.Configure<ApiBehaviorOptions>(options => {
 builder.Services.AddControllers(config => {
     config.RespectBrowserAcceptHeader = true;//INFO: Helps us with Content Negotiation
     config.ReturnHttpNotAcceptable = true;//INFO: to restrict the client from requesting unsupported media types.
+    config.InputFormatters.Insert(0, GetJsonPatchInputFormatter());//INFO: We are placing our JsonPatchInputFormatter at the index 0 in the InputFormatters list.
 })
 .AddXmlDataContractSerializerFormatters()
 .AddCustomCSVFormatter() //INFO: to implement a custom csv formatter.
@@ -69,3 +73,15 @@ app.UseAuthorization();
 app.MapControllers();//TIP: Gets endpoints from Controller actions and pass them to IEndpointRouteBuilder.  
 
 app.Run();
+
+
+///<summary>
+///INFO: By using AddNewtonsoftJson, we are replacing the System.Text.Json
+///formatters for all JSON content. We don’t want to do that so, we are
+///going ton add a simple workaround in the Program class:
+///</summary>
+NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter() =>
+	new ServiceCollection().AddLogging().AddMvc().AddNewtonsoftJson()
+	.Services.BuildServiceProvider()
+	.GetRequiredService<IOptions<MvcOptions>>().Value.InputFormatters
+	.OfType<NewtonsoftJsonPatchInputFormatter>().First();

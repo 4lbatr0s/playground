@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
@@ -44,9 +45,34 @@ namespace Ultimate.Presentation.Controllers
         [HttpDelete("{id:guid}")]
         public IActionResult DeleteEmployeeForCompany(Guid companyId, Guid id)
         {
-            _serviceManager.EmployeeService.DeleteEmployeeForCompany(companyId, id, trackChanges:false);
+            _serviceManager.EmployeeService.DeleteEmployeeForCompany(companyId, id, trackChanges: false);
             return NoContent();
         }
+
+        [HttpPut("{employeeId:guid}")]
+        public IActionResult UpdateEmployeeForCompany(Guid companyId, Guid employeeId, [FromBody] EmployeeForUpdateDto employeeForUpdateDto)
+        {
+            //INFO: When we pass empTrackChanges:true, EF Core follows the changes in the employee object with the employeeId 
+            //and converts its status to Modified
+            _serviceManager.EmployeeService.UpdateEmployeeForCompany(companyId, employeeId, employeeForUpdateDto, compTrackChanges: false, empTrackChanges: true);
+            return NoContent();
+        }
+
+        [HttpPatch("{id:guid}")]
+        public IActionResult PartiallyUpdateEmployeeForCompany(Guid companyId, Guid id,
+        [FromBody] JsonPatchDocument<EmployeeForUpdateDto> patchDoc)
+        {
+            if (patchDoc is null)
+                return BadRequest("patchDoc object sent from client is null.");
+            var result = _serviceManager.EmployeeService.GetEmployeeForPatch(companyId, id,
+            compTrackChanges: false,
+            empTrackChanges: true);
+            patchDoc.ApplyTo(result.employeeToPatch);
+            _serviceManager.EmployeeService.SaveChangesForPatch(result.employeeToPatch,
+            result.employeeEntity);
+            return NoContent();
+        }
+
 
     }
 

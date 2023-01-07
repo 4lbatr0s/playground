@@ -11,5 +11,9 @@
     <Reference Include="System.Core" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Service.Contracts\Service.Contracts.csproj" />
+  </ItemGroup>
+
 
 </Project>

@@ -9,9 +9,9 @@ using Shared.DataTransferObjects.Exceptions;
 
 namespace Service;
 
-internal sealed class EmployeeService:IEmployeeService
+internal sealed class EmployeeService : IEmployeeService
 {
-    private readonly  IRepositoryManager _repository;//INFO: RepositoryManager.cs 
+    private readonly IRepositoryManager _repository;//INFO: RepositoryManager.cs 
     private readonly ILoggerManager _logger;
     private readonly IMapper _mapper;
     public EmployeeService(ILoggerManager logger, IRepositoryManager repository, IMapper mapper)
@@ -53,7 +53,7 @@ internal sealed class EmployeeService:IEmployeeService
         var company = _repository.Company.GetCompany(companyId, trackChanges);
         if (company is null)
             throw new CompanyNotFoundException(companyId);
-        var employee  = _repository.Employee.GetEmployee(companyId, employeeId, trackChanges);
+        var employee = _repository.Employee.GetEmployee(companyId, employeeId, trackChanges);
         if (employee is null)
             throw new EmployeeNotFoundException(employeeId);
         var employeeDto = _mapper.Map<EmployeeDto>(employee);
@@ -68,5 +68,44 @@ internal sealed class EmployeeService:IEmployeeService
         var employees = _repository.Employee.GetEmployees(companyId, trackChanges);
         var employeeDtos = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
         return employeeDtos;
+    }
+
+
+    //INFO: HOW TO PATCH REQUEST!
+    public (EmployeeForUpdateDto employeeToPatch, Employee employeeEntity) GetEmployeeForPatch(Guid companyId, Guid employeeId, bool compTrackChanges, bool empTrackChanges)
+    {
+        var company = _repository.Company.GetCompany(companyId, compTrackChanges);
+        if (company is null)
+            throw new CompanyNotFoundException(companyId);
+        var employeeEntity = _repository.Employee.GetEmployee(companyId, employeeId,
+        empTrackChanges);
+        if (employeeEntity is null)
+            throw new EmployeeNotFoundException(companyId);
+        
+            
+        var employeeToPatch = _mapper.Map<EmployeeForUpdateDto>(employeeEntity);
+        return (employeeToPatch, employeeEntity);
+    }
+    //INFO: HOW TO PATCH REQUEST!
+    public void SaveChangesForPatch(EmployeeForUpdateDto employeeToPatch, Employee employeeEntity)
+    {
+        _mapper.Map(employeeToPatch, employeeEntity);
+        _repository.Save();
+    }
+
+    //INFO: How to update an employee!
+    //INFO: If we update an object, we should follow their trackChanges.
+    public void UpdateEmployeeForCompany(Guid companyId, Guid employeeId, EmployeeForUpdateDto employeeForUpdateDto, bool compTrackChanges, bool empTrackChanges)
+    {
+        var company = _repository.Company.GetCompany(companyId, compTrackChanges);
+        if (company is null)
+            throw new CompanyNotFoundException(companyId);
+        var employeeEntity = _repository.Employee.GetEmployee(companyId, employeeId, empTrackChanges);
+        if (employeeEntity is null)
+            throw new EmployeeNotFoundException(employeeId);
+        if (employeeForUpdateDto is null)
+            throw new EmployeeForUpdateDtoIsNullException();
+        _mapper.Map(employeeForUpdateDto, employeeEntity); //TIP: HOW TO UPDATE WITH MAPPING.
+        _repository.Save();
     }
 }

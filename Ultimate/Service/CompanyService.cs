@@ -3,12 +3,14 @@ using Contracts;
 using Entities.Models;
 using Shared.DataTransferObjects;
 
-namespace Service;
 
 using System;
 using Entities.Exceptions;
 using Service.Contracts;
 using Shared.DataTransferObjects.Exceptions;
+
+
+namespace Service;
 
 internal sealed class CompanyService : ICompanyService
 {
@@ -91,5 +93,19 @@ internal sealed class CompanyService : ICompanyService
             throw new CompanyNotFoundException(companyId); //INFO: Our Custom exceptions works with the Global Exception Handler.
         _repository.Company.DeleteCompany(company);
         _repository.Save();
+    }
+
+
+    //INFO: HOW TO UPDATE COMPANY, while updating company how to create children resources.
+    public void UpdateCompany(Guid companyId, CompanyForUpdateDto companyForUpdateDto, bool trackChanges)
+    {
+        var companyEntity = _repository.Company.GetCompany(companyId, trackChanges);
+        if (companyEntity is null)
+            throw new CompanyNotFoundException(companyId); //INFO: Our Custom exceptions works with the Global Exception Handler.
+        if(companyForUpdateDto is null)
+            throw new CompanyForUpdateDtoIsNullException();
+        _mapper.Map(companyForUpdateDto, companyEntity);
+        _repository.Save();
+    
     }
 }

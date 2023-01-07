@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
@@ -39,23 +40,23 @@ namespace Ultimate.Presentation.Controllers
         public IActionResult CreateCompany([FromBody] CompanyForCreationDto company)
         {
             var createdCompany = _serviceManager.CompanyService.CreateCompany(company);
-            return CreatedAtRoute("CompanyById", new {id=createdCompany.Id}, createdCompany); //INFO: How to return a static object.
+            return CreatedAtRoute("CompanyById", new { id = createdCompany.Id }, createdCompany); //INFO: How to return a static object.
         }
 
 
         //INFO: How to return a collection of items!
         //INFO: we have created a ModelBinding and used it on GetCompanyCollection, because we are obligated to send our ids as String.
         [HttpGet("collection/{ids}", Name = "CompanyCollection")]
-        public IActionResult GetCompanyCollection([ModelBinder(BinderType=typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
+        public IActionResult GetCompanyCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
         {
-            var companies = _serviceManager.CompanyService.GetByIds(ids, trackChanges:false);
+            var companies = _serviceManager.CompanyService.GetByIds(ids, trackChanges: false);
             return Ok(companies);
         }
-        
+
 
         //INFO: HOW TO CREATE A COLLECTION!
         [HttpPost("collection")]
-        public IActionResult CreateCompanyCollection ([FromBody] IEnumerable<CompanyForCreationDto> companyCollection)
+        public IActionResult CreateCompanyCollection([FromBody] IEnumerable<CompanyForCreationDto> companyCollection)
         {
             var result = _serviceManager.CompanyService.CreateCompanyCollection(companyCollection);
 
@@ -63,14 +64,24 @@ namespace Ultimate.Presentation.Controllers
                 So why we return strings to CompanyCollection(GetCompanyCollection) when it requires IEnumerable as ids?
                 Because CreatedAtRoute cannot create Location header with List, but it can create it with String.
             */
-            return CreatedAtRoute("CompanyCollection", new {result.ids}, result.companies); 
+            return CreatedAtRoute("CompanyCollection", new { result.ids }, result.companies);
         }
 
         [HttpDelete("{companyId:guid}")]
         public IActionResult DeleteCompany(Guid companyId)
         {
-            _serviceManager.CompanyService.DeleteCompany(companyId, trackChanges:false);
+            _serviceManager.CompanyService.DeleteCompany(companyId, trackChanges: false);
             return NoContent();
         }
+
+        //INFO: How to update a parent resource.
+        [HttpPut("{companyId:guid}")]
+        public IActionResult UpdateCompany(Guid companyId, [FromBody] CompanyForUpdateDto companyForUpdateDto)
+        {
+            _serviceManager.CompanyService.UpdateCompany(companyId, companyForUpdateDto, trackChanges: true);
+            return NoContent();
+        }
+
+
     }
 }

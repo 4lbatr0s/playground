@@ -29,6 +29,7 @@ public static class ExceptionMiddlewareExtension
                     //INFO: For collection, if we send bad request, return bad request not 500 internal server error.
                     context.Response.StatusCode = contextFeature.Error switch
                     {
+                        //TIP: For Exceptions that are inherited from NotFoundException, throw 404
                         NotFoundException => StatusCodes.Status404NotFound,
                         BadRequestException => StatusCodes.Status400BadRequest,
                         _ => StatusCodes.Status500InternalServerError
