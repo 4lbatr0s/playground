@@ -20,8 +20,8 @@ public class MappingProfile : Profile
                 opt => opt.MapFrom(x => string.Join(' ', x.Address, x.Country)));
         CreateMap<Employee, EmployeeDto>();
         CreateMap<CompanyForCreationDto, Company>();
-        CreateMap<EmployeForCreationDto, Employee>().ReverseMap();//INFO: We need Mapping from Employee to EmployeeForCreationDto for PATCH REQUEST,THEREFORE REVERSEMAP!
-        CreateMap<EmployeeForUpdateDto, Employee>();
+        CreateMap<EmployeForCreationDto, Employee>();
+        CreateMap<EmployeeForUpdateDto, Employee>().ReverseMap();//INFO: We need Mapping from Employee to EmployeeForCreationDto for PATCH REQUEST,THEREFORE REVERSEMAP
         CreateMap<CompanyForUpdateDto, Company>();
     }
 }

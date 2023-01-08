@@ -86,3 +86,6 @@
 /home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/bin/Debug/net6.0/Shared.pdb
 /home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/bin/Debug/net6.0/AutoMapper.dll
 /home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/bin/Debug/net6.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+/home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/bin/Debug/net6.0/Microsoft.AspNetCore.JsonPatch.dll
+/home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/bin/Debug/net6.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/bin/Debug/net6.0/Newtonsoft.Json.Bson.dll
