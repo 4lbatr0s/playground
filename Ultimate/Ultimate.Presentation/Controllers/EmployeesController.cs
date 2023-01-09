@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
+using Service.ValidationHelpers;
 using Shared.DataTransferObjects;
 
 namespace Ultimate.Presentation.Controllers
@@ -38,6 +39,21 @@ namespace Ultimate.Presentation.Controllers
         [HttpPost]
         public IActionResult CreateEmployeeForCompany(Guid companyId, [FromBody] EmployeForCreationDto employeForCreationDto)
         {
+            //INFO: WHAT IS ModelState: a dictionary that holds info about ModelState(in this case EmployeeForCreationDto)
+            //INFO: And every key of the model state is the property of our EmployeeForCreationDto.
+            //INFO: HOW TO VALIDATE!
+            //TODO: Do it with ModelStateHelper class.
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Name", "Stupid error, don't repeat it ever again!");//INFO: We can create custom Error Messages for ModelState keys.
+                var errors = new Dictionary<string, string[]>();
+                foreach (var state in ModelState)
+                {
+                    errors[state.Key] = state.Value.Errors.Select(error => error.ErrorMessage).ToArray();
+                }
+                return UnprocessableEntity(errors);
+            }
+
             var employeeToReturn = _serviceManager.EmployeeService.CreateEmployeeForCompany(companyId, employeForCreationDto, trackChanges: false);
             return CreatedAtRoute("GetEmployeeForCompany", new { companyId, id = employeeToReturn.Id }, employeeToReturn);
         }
@@ -54,6 +70,17 @@ namespace Ultimate.Presentation.Controllers
         {
             //INFO: When we pass empTrackChanges:true, EF Core follows the changes in the employee object with the employeeId 
             //and converts its status to Modified
+            //TODO: Do it with ModelStateHelper class.
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError("Name", "Stupid error, don't repeat it ever again!");//INFO: We can create custom Error Messages for ModelState keys.
+                var errors = new Dictionary<string, string[]>();
+                foreach (var state in ModelState)
+                {
+                    errors[state.Key] = state.Value.Errors.Select(error => error.ErrorMessage).ToArray();
+                }
+                return UnprocessableEntity(errors);
+            }
             _serviceManager.EmployeeService.UpdateEmployeeForCompany(companyId, employeeId, employeeForUpdateDto, compTrackChanges: false, empTrackChanges: true);
             return NoContent();
         }
@@ -67,7 +94,13 @@ namespace Ultimate.Presentation.Controllers
             var result = _serviceManager.EmployeeService.GetEmployeeForPatch(companyId, id,
             compTrackChanges: false,
             empTrackChanges: true);
-            patchDoc.ApplyTo(result.employeeToPatch);
+ 
+            //INFO: HOW TO VALIDATE PATCH REQUEST!, WE NEED TO USE NEWTONSOFT JSON.
+            patchDoc.ApplyTo(result.employeeToPatch, ModelState);
+            TryValidateModel(result.employeeToPatch); //INFO: IF we do not use this, validation errors with Remove patch will not be noticed!
+            if(!ModelState.IsValid)
+                return UnprocessableEntity(ModelState);
+
             _serviceManager.EmployeeService.SaveChangesForPatch(result.employeeToPatch,
             result.employeeEntity);
             return NoContent();
