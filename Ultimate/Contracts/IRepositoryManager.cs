@@ -4,6 +4,6 @@ namespace Contracts{
         ICompanyRepository Company {get;}
         IEmployeeRepository Employee {get;}
 
-        void Save();
+        Task Save(); //INFO: Implements the SaveChanges method. It needs to be asynchronous.
     }
 }

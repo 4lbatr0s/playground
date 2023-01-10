@@ -1,5 +1,7 @@
 using Contracts;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
+
 namespace Repository
 {
 
@@ -16,7 +18,13 @@ namespace Repository
         {
 
         }
-
+        
+        /*
+        INFO: Create and Delete operations that are coming from EF Core DBContext do not change anything 
+            in the db actually. They just change the state of the instances that we send.
+            Therefore they're not I/O operations.They're executed on the Internal Cache of the DBContext.
+            Which makes them fast enough.
+        */
         public void CreateCompany(Company company)
         {
             Create(company);//INFO: comes from RepositoryBase.
@@ -25,21 +33,21 @@ namespace Repository
         public void DeleteCompany(Company company) => Delete(company);
 
         //INFO: We implements RepositoryBases' FindAll funtion under a different function name, then we will call this from service.
-        public IEnumerable<Company> GetAllCompanies(bool trackChanges)
+        public async Task<IEnumerable<Company>> GetAllCompaniesAsync(bool trackChanges)
         {
-            return FindAll(trackChanges)
+            return await FindAll(trackChanges)
                 .OrderBy(c => c.Name)
-                .ToList();
+                .ToListAsync();
         }
 
         //INFO: HOW TO CALL A COLLECTION OF ITEMS.
-        public IEnumerable<Company> GetByIds(IEnumerable<Guid> ids, bool trackChanges)
+        public async Task<IEnumerable<Company>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges)
         {
-            return FindByCondition(x=> ids.Contains(x.Id), trackChanges).ToList();
+            return await FindByCondition(x=> ids.Contains(x.Id), trackChanges).ToListAsync();
         }
 
-        public Company GetCompany(Guid companyId, bool trackChanges) =>
-        FindByCondition(c => c.Id.Equals(companyId), trackChanges)
-        .SingleOrDefault();
+        public async Task<Company> GetCompanyAsync(Guid companyId, bool trackChanges) =>
+        await FindByCondition(c => c.Id.Equals(companyId), trackChanges)
+        .SingleOrDefaultAsync();
     }
 }

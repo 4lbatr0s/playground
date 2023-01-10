@@ -19,27 +19,27 @@ namespace Ultimate.Presentation.Controllers
 
 
         [HttpGet] //TIP: route of this action will be api/companies.
-        public IActionResult GetCompanies()
+        public async Task<IActionResult> GetCompanies()
         {
             //testing the global exception:
             // throw new Exception("Exception");
-            var companies = _serviceManager.CompanyService.GetAllCompanies(trackChanges: false);
+            var companies = await _serviceManager.CompanyService.GetAllCompaniesAsync(trackChanges: false);
             return Ok(companies);
         }
 
         [HttpGet("{id:guid}", Name = "CompanyById")]//INFO: Our path is api/companies/id, our id's type is GUID!
-        public IActionResult GetCompany(Guid id)
+        public async Task<IActionResult> GetCompany(Guid id)
         {
-            var company = _serviceManager.CompanyService.GetCompany(id, trackChanges: false);
+            var company = await _serviceManager.CompanyService.GetCompanyAsync(id, trackChanges: false);
             return Ok(company);
         }
 
 
         //INFO: We can also use FromUri, but its not reccomended.        
         [HttpPost] //INFO: FromBody: we are not going to take values from URI, we will get them from body, 2. the object is complex, therefore we shoudl use FromBody.
-        public IActionResult CreateCompany([FromBody] CompanyForCreationDto company)
+        public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto company)
         {
-            var createdCompany = _serviceManager.CompanyService.CreateCompany(company);
+            var createdCompany = await _serviceManager.CompanyService.CreateCompanyAsync(company);
             return CreatedAtRoute("CompanyById", new { id = createdCompany.Id }, createdCompany); //INFO: How to return a static object.
         }
 
@@ -47,18 +47,18 @@ namespace Ultimate.Presentation.Controllers
         //INFO: How to return a collection of items!
         //INFO: we have created a ModelBinding and used it on GetCompanyCollection, because we are obligated to send our ids as String.
         [HttpGet("collection/{ids}", Name = "CompanyCollection")]
-        public IActionResult GetCompanyCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
+        public async Task<IActionResult> GetCompanyCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> ids)
         {
-            var companies = _serviceManager.CompanyService.GetByIds(ids, trackChanges: false);
+            var companies = await _serviceManager.CompanyService.GetByIdsAsync(ids, trackChanges: false);
             return Ok(companies);
         }
 
 
         //INFO: HOW TO CREATE A COLLECTION!
         [HttpPost("collection")]
-        public IActionResult CreateCompanyCollection([FromBody] IEnumerable<CompanyForCreationDto> companyCollection)
+        public async Task<IActionResult> CreateCompanyCollection([FromBody] IEnumerable<CompanyForCreationDto> companyCollection)
         {
-            var result = _serviceManager.CompanyService.CreateCompanyCollection(companyCollection);
+            var result = await _serviceManager.CompanyService.CreateCompanyCollectionAsync(companyCollection);
 
             /*
                 So why we return strings to CompanyCollection(GetCompanyCollection) when it requires IEnumerable as ids?
@@ -68,17 +68,17 @@ namespace Ultimate.Presentation.Controllers
         }
 
         [HttpDelete("{companyId:guid}")]
-        public IActionResult DeleteCompany(Guid companyId)
+        public async Task<IActionResult> DeleteCompany(Guid companyId)
         {
-            _serviceManager.CompanyService.DeleteCompany(companyId, trackChanges: false);
+            await _serviceManager.CompanyService.DeleteCompanyAsync(companyId, trackChanges: false);
             return NoContent();
         }
 
         //INFO: How to update a parent resource.
         [HttpPut("{companyId:guid}")]
-        public IActionResult UpdateCompany(Guid companyId, [FromBody] CompanyForUpdateDto companyForUpdateDto)
+        public async Task<IActionResult> UpdateCompany(Guid companyId, [FromBody] CompanyForUpdateDto companyForUpdateDto)
         {
-            _serviceManager.CompanyService.UpdateCompany(companyId, companyForUpdateDto, trackChanges: true);
+            await _serviceManager.CompanyService.UpdateCompanyAsync(companyId, companyForUpdateDto, trackChanges: true);
             return NoContent();
         }
 

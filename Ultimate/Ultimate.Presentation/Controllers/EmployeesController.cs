@@ -19,25 +19,25 @@ namespace Ultimate.Presentation.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetEmployeesForCompany(Guid companyId)
+        public async Task<IActionResult> GetEmployeesForCompany(Guid companyId)
         {
-            var employees = _serviceManager.EmployeeService.GetEmployees(companyId, trackChanges:
+            var employees = await _serviceManager.EmployeeService.GetEmployeesAsync(companyId, trackChanges:
             false);
             return Ok(employees);
         }
 
 
         [HttpGet("{id:guid}", Name = nameof(GetEmployeeForCompany))]
-        public IActionResult GetEmployeeForCompany(Guid companyId, Guid id)
+        public async Task<IActionResult> GetEmployeeForCompany(Guid companyId, Guid id)
         {
-            var employee = _serviceManager.EmployeeService.GetEmployee(companyId, id,
+            var employee = await _serviceManager.EmployeeService.GetEmployeeAsync(companyId, id,
             trackChanges: false);
             return Ok(employee);
         }
 
 
         [HttpPost]
-        public IActionResult CreateEmployeeForCompany(Guid companyId, [FromBody] EmployeForCreationDto employeForCreationDto)
+        public async Task<IActionResult> CreateEmployeeForCompany(Guid companyId, [FromBody] EmployeForCreationDto employeForCreationDto)
         {
             //INFO: WHAT IS ModelState: a dictionary that holds info about ModelState(in this case EmployeeForCreationDto)
             //INFO: And every key of the model state is the property of our EmployeeForCreationDto.
@@ -54,19 +54,19 @@ namespace Ultimate.Presentation.Controllers
                 return UnprocessableEntity(errors);
             }
 
-            var employeeToReturn = _serviceManager.EmployeeService.CreateEmployeeForCompany(companyId, employeForCreationDto, trackChanges: false);
+            var employeeToReturn = await _serviceManager.EmployeeService.CreateEmployeeForCompanyAsync(companyId, employeForCreationDto, trackChanges: false);
             return CreatedAtRoute("GetEmployeeForCompany", new { companyId, id = employeeToReturn.Id }, employeeToReturn);
         }
 
         [HttpDelete("{id:guid}")]
-        public IActionResult DeleteEmployeeForCompany(Guid companyId, Guid id)
+        public async Task<IActionResult> DeleteEmployeeForCompany(Guid companyId, Guid id)
         {
-            _serviceManager.EmployeeService.DeleteEmployeeForCompany(companyId, id, trackChanges: false);
+            await _serviceManager.EmployeeService.DeleteEmployeeForCompanyAsync(companyId, id, trackChanges: false);
             return NoContent();
         }
 
         [HttpPut("{employeeId:guid}")]
-        public IActionResult UpdateEmployeeForCompany(Guid companyId, Guid employeeId, [FromBody] EmployeeForUpdateDto employeeForUpdateDto)
+        public async Task<IActionResult> UpdateEmployeeForCompany(Guid companyId, Guid employeeId, [FromBody] EmployeeForUpdateDto employeeForUpdateDto)
         {
             //INFO: When we pass empTrackChanges:true, EF Core follows the changes in the employee object with the employeeId 
             //and converts its status to Modified
@@ -81,17 +81,17 @@ namespace Ultimate.Presentation.Controllers
                 }
                 return UnprocessableEntity(errors);
             }
-            _serviceManager.EmployeeService.UpdateEmployeeForCompany(companyId, employeeId, employeeForUpdateDto, compTrackChanges: false, empTrackChanges: true);
+            await _serviceManager.EmployeeService.UpdateEmployeeForCompanyAsync(companyId, employeeId, employeeForUpdateDto, compTrackChanges: false, empTrackChanges: true);
             return NoContent();
         }
 
         [HttpPatch("{id:guid}")]
-        public IActionResult PartiallyUpdateEmployeeForCompany(Guid companyId, Guid id,
+        public async Task<IActionResult> PartiallyUpdateEmployeeForCompany(Guid companyId, Guid id,
         [FromBody] JsonPatchDocument<EmployeeForUpdateDto> patchDoc)
         {
             if (patchDoc is null)
                 return BadRequest("patchDoc object sent from client is null.");
-            var result = _serviceManager.EmployeeService.GetEmployeeForPatch(companyId, id,
+            var result = await _serviceManager.EmployeeService.GetEmployeeForPatchAsync(companyId, id,
             compTrackChanges: false,
             empTrackChanges: true);
  
@@ -101,7 +101,7 @@ namespace Ultimate.Presentation.Controllers
             if(!ModelState.IsValid)
                 return UnprocessableEntity(ModelState);
 
-            _serviceManager.EmployeeService.SaveChangesForPatch(result.employeeToPatch,
+            await _serviceManager.EmployeeService.SaveChangesForPatchAsync(result.employeeToPatch,
             result.employeeEntity);
             return NoContent();
         }

@@ -29,6 +29,8 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
 
     }
 
+    //INFO: Below functions actually do not change anything in the database
+    //They dont create delete or update, they change the state of the entity.
     public void Create(T entity) => RepositoryContext.Set<T>().Add(entity); //TIP: set repository to T type, and add entitity to this type of resource.
     public void Update(T entity) => RepositoryContext.Set<T>().Update(entity);
     public void Delete(T entity) => RepositoryContext.Set<T>().Remove(entity);

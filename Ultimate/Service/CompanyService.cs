@@ -8,7 +8,7 @@ using System;
 using Entities.Exceptions;
 using Service.Contracts;
 using Shared.DataTransferObjects.Exceptions;
-
+using System.Security.Cryptography;
 
 namespace Service;
 
@@ -24,13 +24,13 @@ internal sealed class CompanyService : ICompanyService
         _mapper = mapper;
     }
 
-    public CompanyDto CreateCompany(CompanyForCreationDto company)
+    public async Task<CompanyDto> CreateCompanyAsync(CompanyForCreationDto company)
     {
         if (company is null)
             throw new CompanyForCreationDtoIsNullException();
         var companyEntity = _mapper.Map<Company>(company);
         _repository.Company.CreateCompany(companyEntity);
-        _repository.Save();
+        await _repository.Save();
         var companyToReturn = _mapper.Map<CompanyDto>(companyEntity);
         return companyToReturn;
     }
@@ -38,20 +38,20 @@ internal sealed class CompanyService : ICompanyService
 
 
     //INFO: Getting all entities from DB IS A BAD IDEA!
-    public IEnumerable<CompanyDto> GetAllCompanies(bool trackChanges)
+    public async Task<IEnumerable<CompanyDto>> GetAllCompaniesAsync(bool trackChanges)
     { //INFO: We use try catch here not in the Controller!
 
-        var companies = _repository.Company.GetAllCompanies(trackChanges);
+        var companies = await _repository.Company.GetAllCompaniesAsync(trackChanges);
         var companyDtos = _mapper.Map<IEnumerable<CompanyDto>>(companies); //INFO: Destination => Resource, opposite of Mapping Profile!
         return companyDtos;
     }
 
     //INFO: HOW TO GET A COLLECTION OF ITEMS
-    public IEnumerable<CompanyDto> GetByIds(IEnumerable<Guid> ids, bool trackChanges)
+    public async Task<IEnumerable<CompanyDto>> GetByIdsAsync(IEnumerable<Guid> ids, bool trackChanges)
     {
         if (ids is null)
             throw new IdParametersBadRequestException();
-        var companyEntities = _repository.Company.GetByIds(ids, trackChanges);
+        var companyEntities = await _repository.Company.GetByIdsAsync(ids, trackChanges);
         if (ids.Count() != companyEntities.Count())
             throw new CollectionByIdsBadRequestException();
         var companiesToReturn = _mapper.Map<IEnumerable<CompanyDto>>(companyEntities);
@@ -59,7 +59,7 @@ internal sealed class CompanyService : ICompanyService
     }
 
     //INFO: HOW TO CREATE A COLLECTION SERVICE!
-    public (IEnumerable<CompanyDto> companies, string ids) CreateCompanyCollection(IEnumerable<CompanyForCreationDto> companyCollection)
+    public async Task<(IEnumerable<CompanyDto> companies, string ids)> CreateCompanyCollectionAsync(IEnumerable<CompanyForCreationDto> companyCollection)
     {
         if (companyCollection is null)
             throw new CompanyCollectionBadRequest();
@@ -68,7 +68,7 @@ internal sealed class CompanyService : ICompanyService
         {
             _repository.Company.CreateCompany(company);
         }
-        _repository.Save();
+        await _repository.Save();
 
         //Get its and dtos.
         var companyCollectionToReturn = _mapper.Map<IEnumerable<CompanyDto>>(companyEntities);
@@ -77,35 +77,35 @@ internal sealed class CompanyService : ICompanyService
         return (companies: companyCollectionToReturn, ids: ids); //TIP: How to return dynamic object.
     }
 
-    public CompanyDto GetCompany(Guid companyId, bool trackChanges)
+    public async Task<CompanyDto> GetCompanyAsync(Guid companyId, bool trackChanges)
     {
-        var company = _repository.Company.GetCompany(companyId, trackChanges);
+        var company = await _repository.Company.GetCompanyAsync(companyId, trackChanges);
         if (company is null)
             throw new CompanyNotFoundException(companyId); //INFO: Our Custom exceptions works with the Global Exception Handler.
         var companyDto = _mapper.Map<CompanyDto>(company);
         return companyDto;
     }
 
-    public void DeleteCompany(Guid companyId, bool trackChanges)
+    public async Task DeleteCompanyAsync(Guid companyId, bool trackChanges)
     {
-        var company = _repository.Company.GetCompany(companyId, trackChanges);
+        var company = await _repository.Company.GetCompanyAsync(companyId, trackChanges);
         if (company is null)
             throw new CompanyNotFoundException(companyId); //INFO: Our Custom exceptions works with the Global Exception Handler.
         _repository.Company.DeleteCompany(company);
-        _repository.Save();
+        await _repository.Save();
     }
 
 
     //INFO: HOW TO UPDATE COMPANY, while updating company how to create children resources.
-    public void UpdateCompany(Guid companyId, CompanyForUpdateDto companyForUpdateDto, bool trackChanges)
+    public async Task UpdateCompanyAsync(Guid companyId, CompanyForUpdateDto companyForUpdateDto, bool trackChanges)
     {
-        var companyEntity = _repository.Company.GetCompany(companyId, trackChanges);
+        var companyEntity = await _repository.Company.GetCompanyAsync(companyId, trackChanges);
         if (companyEntity is null)
             throw new CompanyNotFoundException(companyId); //INFO: Our Custom exceptions works with the Global Exception Handler.
         if(companyForUpdateDto is null)
             throw new CompanyForUpdateDtoIsNullException();
         _mapper.Map(companyForUpdateDto, companyEntity);
-        _repository.Save();
+        await _repository.Save();
     
     }
 }
