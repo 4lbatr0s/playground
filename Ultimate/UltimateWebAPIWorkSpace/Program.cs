@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using NLog;
 using UltimateWebAPIWorkSpace.Extensions;
+using Ultimate.Presentation.ActionFilters;
 /**
 * INFO:builder helps us to add Configurations, Services, Loggin Configurations, IHostBuilder and IWebHostBuilder 
 */
@@ -26,6 +27,8 @@ builder.Services.ConfigureServiceManager();
 builder.Services.Configure<ApiBehaviorOptions>(options => {
     options.SuppressModelStateInvalidFilter = true;  
 });
+
+builder.Services.AddScoped<ValidationFilterAttribute>();//INFO: Helps us with validation filters
 builder.Services.AddControllers(config => {
     config.RespectBrowserAcceptHeader = true;//INFO: Helps us with Content Negotiation
     config.ReturnHttpNotAcceptable = true;//INFO: to restrict the client from requesting unsupported media types.

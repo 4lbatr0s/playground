@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using System.Net.Http;
 namespace Service.ValidationHelpers;
 
+
 public class ModelStateHelper : IActionResult
 {
    private readonly object _value; //TIP: first we create an object type, we will return this.
@@ -29,6 +30,7 @@ public class ModelStateHelper : IActionResult
         return Task.FromResult(response);
     }
 
+    //INFO: HOW TO CREATE A METHOD THAT CAN BE RETURNED AS ACTION RESULT
     public static IActionResult ReturnUnprocessableEntityWithErrors(ModelStateDictionary modelState)
     {
         var errors = new Dictionary<string, string[]>();

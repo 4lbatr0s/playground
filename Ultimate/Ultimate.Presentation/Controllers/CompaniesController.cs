@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
+using Ultimate.Presentation.ActionFilters;
 using Ultimate.Presentation.ModelBinders;
 
 namespace Ultimate.Presentation.Controllers
@@ -37,6 +38,7 @@ namespace Ultimate.Presentation.Controllers
 
         //INFO: We can also use FromUri, but its not reccomended.        
         [HttpPost] //INFO: FromBody: we are not going to take values from URI, we will get them from body, 2. the object is complex, therefore we shoudl use FromBody.
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto company)
         {
             var createdCompany = await _serviceManager.CompanyService.CreateCompanyAsync(company);
@@ -56,6 +58,7 @@ namespace Ultimate.Presentation.Controllers
 
         //INFO: HOW TO CREATE A COLLECTION!
         [HttpPost("collection")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateCompanyCollection([FromBody] IEnumerable<CompanyForCreationDto> companyCollection)
         {
             var result = await _serviceManager.CompanyService.CreateCompanyCollectionAsync(companyCollection);
@@ -76,6 +79,7 @@ namespace Ultimate.Presentation.Controllers
 
         //INFO: How to update a parent resource.
         [HttpPut("{companyId:guid}")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> UpdateCompany(Guid companyId, [FromBody] CompanyForUpdateDto companyForUpdateDto)
         {
             await _serviceManager.CompanyService.UpdateCompanyAsync(companyId, companyForUpdateDto, trackChanges: true);
