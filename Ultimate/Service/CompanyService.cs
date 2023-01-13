@@ -9,6 +9,7 @@ using Entities.Exceptions;
 using Service.Contracts;
 using Shared.DataTransferObjects.Exceptions;
 using System.Security.Cryptography;
+using System.Reflection.Metadata;
 
 namespace Service;
 
@@ -70,7 +71,7 @@ internal sealed class CompanyService : ICompanyService
         }
         await _repository.Save();
 
-        //Get its and dtos.
+        //TIP:Get Ids and DTOs of every company.
         var companyCollectionToReturn = _mapper.Map<IEnumerable<CompanyDto>>(companyEntities);
         var ids = string.Join(",", companyCollectionToReturn.Select(c => c.Id));
 
@@ -79,18 +80,14 @@ internal sealed class CompanyService : ICompanyService
 
     public async Task<CompanyDto> GetCompanyAsync(Guid companyId, bool trackChanges)
     {
-        var company = await _repository.Company.GetCompanyAsync(companyId, trackChanges);
-        if (company is null)
-            throw new CompanyNotFoundException(companyId); //INFO: Our Custom exceptions works with the Global Exception Handler.
+        var company = await GetCompanyAndCheckIfItExists(companyId, trackChanges);
         var companyDto = _mapper.Map<CompanyDto>(company);
         return companyDto;
     }
 
     public async Task DeleteCompanyAsync(Guid companyId, bool trackChanges)
     {
-        var company = await _repository.Company.GetCompanyAsync(companyId, trackChanges);
-        if (company is null)
-            throw new CompanyNotFoundException(companyId); //INFO: Our Custom exceptions works with the Global Exception Handler.
+        var company = await GetCompanyAndCheckIfItExists(companyId, trackChanges);
         _repository.Company.DeleteCompany(company);
         await _repository.Save();
     }
@@ -99,13 +96,20 @@ internal sealed class CompanyService : ICompanyService
     //INFO: HOW TO UPDATE COMPANY, while updating company how to create children resources.
     public async Task UpdateCompanyAsync(Guid companyId, CompanyForUpdateDto companyForUpdateDto, bool trackChanges)
     {
-        var companyEntity = await _repository.Company.GetCompanyAsync(companyId, trackChanges);
-        if (companyEntity is null)
-            throw new CompanyNotFoundException(companyId); //INFO: Our Custom exceptions works with the Global Exception Handler.
+        var companyEntity = await GetCompanyAndCheckIfItExists(companyId, trackChanges);
         if(companyForUpdateDto is null)
             throw new CompanyForUpdateDtoIsNullException();
         _mapper.Map(companyForUpdateDto, companyEntity);
         await _repository.Save();
     
     }
+
+    //INFO: Private methods for implementing the DRY principle
+    private async Task<Company> GetCompanyAndCheckIfItExists(Guid companyId, bool trackChanges)
+    {
+        var company = await _repository.Company.GetCompanyAsync(companyId, trackChanges);
+        if (company is null)
+            throw new CompanyNotFoundException(companyId);
+        return company;
+    } 
 }

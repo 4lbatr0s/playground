@@ -28,6 +28,9 @@
             "projectReferences": {
               "/home/serhatoner/Coding/playground/Ultimate/Entities/Entities.csproj": {
                 "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Entities/Entities.csproj"
+              },
+              "/home/serhatoner/Coding/playground/Ultimate/Shared/Shared.csproj": {
+                "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Shared/Shared.csproj"
               }
             }
           }
@@ -69,6 +72,59 @@
         "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Entities/Entities.csproj",
         "packagesPath": "/home/serhatoner/.nuget/packages/",
         "outputPath": "/home/serhatoner/Coding/playground/Ultimate/Entities/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/serhatoner/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.404/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/home/serhatoner/Coding/playground/Ultimate/Shared/Shared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/serhatoner/Coding/playground/Ultimate/Shared/Shared.csproj",
+        "projectName": "Shared",
+        "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Shared/Shared.csproj",
+        "packagesPath": "/home/serhatoner/.nuget/packages/",
+        "outputPath": "/home/serhatoner/Coding/playground/Ultimate/Shared/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/serhatoner/.nuget/NuGet/NuGet.Config"

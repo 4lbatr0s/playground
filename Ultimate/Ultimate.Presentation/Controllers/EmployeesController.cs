@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Service.ValidationHelpers;
 using Shared.DataTransferObjects;
+using Shared.RequestFeatures;
 using Ultimate.Presentation.ActionFilters;
+using Ultimate.Presentation.ModelBinders;
 
 namespace Ultimate.Presentation.Controllers
 {
@@ -19,10 +21,14 @@ namespace Ultimate.Presentation.Controllers
             _serviceManager = serviceManager;
         }
 
+
+        //INFO: HOW TO IMPLEMENT PAGING!
+        //INFO: We say that we will get employeeParameters from query. If we send a query like helloWorld=10,
+        //That means we can ge this query like employeeParameters.helloWorld
         [HttpGet]
-        public async Task<IActionResult> GetEmployeesForCompany(Guid companyId)
+        public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, [FromQuery] EmployeeParameters employeeParameters)
         {
-            var employees = await _serviceManager.EmployeeService.GetEmployeesAsync(companyId, trackChanges:
+            var employees = await _serviceManager.EmployeeService.GetEmployeesAsync(companyId, employeeParameters, trackChanges:
             false);
             return Ok(employees);
         }
@@ -41,7 +47,7 @@ namespace Ultimate.Presentation.Controllers
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         public async Task<IActionResult> CreateEmployeeForCompany(Guid companyId, [FromBody] EmployeForCreationDto employeForCreationDto)
         {
-  
+
             //INFO: WE ARE DOING OUR VALIDATION WITH OUR VALIDATIONFILTERATTRIBUTE ACTION FILTER!
 
             //INFO: WHAT IS ModelState: a dictionary that holds info about ModelState(in this case EmployeeForCreationDto)
@@ -100,7 +106,7 @@ namespace Ultimate.Presentation.Controllers
             var result = await _serviceManager.EmployeeService.GetEmployeeForPatchAsync(companyId, id,
             compTrackChanges: false,
             empTrackChanges: true);
- 
+
             //INFO: HOW TO VALIDATE PATCH REQUEST!, WE NEED TO USE NEWTONSOFT JSON.
             patchDoc.ApplyTo(result.employeeToPatch, ModelState);
             TryValidateModel(result.employeeToPatch); //INFO: IF we do not use this, validation errors with Remove patch will not be noticed!
@@ -112,6 +118,33 @@ namespace Ultimate.Presentation.Controllers
             return NoContent();
         }
 
+
+
+        //INFO: How to return a collection of items!
+        //INFO: we have created a ModelBinding and used it on GetCompanyCollection, because we are obligated to send our ids as String.
+        //TIP: employeeIds: should be same as in the parameters: employeeIds
+        [HttpGet("collection/{employeeIds}", Name = "EmployeeCollection")]
+        public async Task<IActionResult> GetEmployeeCollection(Guid companyId, [ModelBinder(BinderType = typeof(ArrayModelBinder))] IEnumerable<Guid> employeeIds)
+        {
+            var employees = await _serviceManager.EmployeeService.GetByIdsAsync(companyId, employeeIds, trackChanges: false);
+            return Ok(employees);
+        }
+
+
+        //INFO: HOW TO CREATE A COLLECTION!
+        [HttpPost("collection")]
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
+        public async Task<IActionResult> CreateEmployeeForCompanyCollection(Guid companyId, [FromBody] IEnumerable<EmployeForCreationDto> employeeCollection)
+        {
+            var result = await _serviceManager.EmployeeService.CreateEmployeeForCompanyCollectionAsync(companyId, employeeCollection, compTrackChanges:false, empTrackChanges:false);
+
+            /*
+                So why we return strings to CompanyCollection(GetCompanyCollection) when it requires IEnumerable as ids?
+                Because CreatedAtRoute cannot create Location header with List, but it can create it with String.
+            */
+            return CreatedAtRoute("EmployeeCollection", new {companyId, result.employeeIds }, result.employees);
+            // return Ok(result.employees);
+        }
 
     }
 

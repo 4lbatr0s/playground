@@ -13,3 +13,5 @@
 /home/serhatoner/Coding/playground/Ultimate/Contracts/bin/Debug/net6.0/Entities.pdb
 /home/serhatoner/Coding/playground/Ultimate/Contracts/obj/Debug/net6.0/Contracts.csproj.CopyComplete
 /home/serhatoner/Coding/playground/Ultimate/Contracts/obj/Debug/net6.0/refint/Contracts.dll
+/home/serhatoner/Coding/playground/Ultimate/Contracts/bin/Debug/net6.0/Shared.dll
+/home/serhatoner/Coding/playground/Ultimate/Contracts/bin/Debug/net6.0/Shared.pdb
