@@ -5,7 +5,7 @@ using Shared.RequestFeatures;
 namespace Service.Contracts;
 public interface IEmployeeService
 {
-    Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(Guid companyId, EmployeeParameters emploeyeParameters,  bool trackChanges);
+    Task<(IEnumerable<EmployeeDto> employees, MetaData metaData)> GetEmployeesAsync(Guid companyId, EmployeeParameters emploeyeParameters,  bool trackChanges);
     Task<EmployeeDto> GetEmployeeAsync(Guid companyId, Guid employeeId, bool trackChanges);
     Task<EmployeeDto> CreateEmployeeForCompanyAsync(Guid companyId, EmployeForCreationDto employee, bool trackChanges);
     Task<(IEnumerable<EmployeeDto> employees, string employeeIds)> 

@@ -50,14 +50,15 @@ internal sealed class EmployeeService : IEmployeeService
         return employeeDto;
     }
 
-    public async Task<IEnumerable<EmployeeDto>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters,  bool trackChanges)
+    public async Task<(IEnumerable<EmployeeDto> employees, MetaData metaData)> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters,  bool trackChanges)
     {
+        if(!employeeParameters.ValidAgeRange)
+            throw new MaxAgeRangeBadRequestException();
         await CheckIfCompanyExist(companyId, trackChanges);
-        var employees = await _repository.Employee.GetEmployeesAsync(companyId, employeeParameters, trackChanges); //TIP: PAGING!
-        var employeeDtos = _mapper.Map<IEnumerable<EmployeeDto>>(employees);
-        return employeeDtos;
+        var employeesWithMetaData = await _repository.Employee.GetEmployeesAsync(companyId, employeeParameters, trackChanges); //TIP: PAGING!
+        var employeeDtos = _mapper.Map<IEnumerable<EmployeeDto>>(employeesWithMetaData);
+        return (employees:employeeDtos, metaData:employeesWithMetaData.MetaData);//INFO: MetaData: property of return
     }
-
 
     //INFO: HOW TO PATCH REQUEST!
     public async Task<(EmployeeForUpdateDto employeeToPatch, Employee employeeEntity)> GetEmployeeForPatchAsync(Guid companyId, Guid employeeId, bool compTrackChanges, bool empTrackChanges)
@@ -122,7 +123,6 @@ internal sealed class EmployeeService : IEmployeeService
         return employeesToReturn;
     }
   
-
 
     //INFO: PRIVATE FUNCTIONS TO IMPLEMENT DRY APPROACH!
     private async Task CheckIfCompanyExist(Guid companyId, bool trackChanges)

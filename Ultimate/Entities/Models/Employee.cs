@@ -23,6 +23,4 @@ public class Employee
 
     public Company? Company { get; set; } //INFO: NAVIGATIONAL PROPERTY: EF CORE WILL NOT MAP THIS TO DB!
 
-
-
 }
