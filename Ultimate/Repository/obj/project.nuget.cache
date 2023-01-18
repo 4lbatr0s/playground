@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "XgLZQvZRx3jY/wkVOBfzPO6tisP1/cl4ivYooKb6lbk/IGYzL27d6G2Fhpn3glvZbdf5gcLvII4ZDdlOpZ3jsQ==",
+  "dgSpecHash": "aWEg9ydyKgt66PC2ejjaR17KjSmSg8mKIfUEYot9VIhhlFBmBt264dh08FJlcdx5jH5aookXD7P90Xs++4i3lQ==",
   "success": true,
   "projectFilePath": "/home/serhatoner/Coding/playground/Ultimate/Repository/Repository.csproj",
   "expectedPackageFiles": [
@@ -17,6 +17,7 @@
     "/home/serhatoner/.nuget/packages/microsoft.extensions.primitives/6.0.0/microsoft.extensions.primitives.6.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/system.collections.immutable/6.0.0/system.collections.immutable.6.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/system.diagnostics.diagnosticsource/6.0.0/system.diagnostics.diagnosticsource.6.0.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/system.linq.dynamic.core/1.2.24/system.linq.dynamic.core.1.2.24.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/system.runtime.compilerservices.unsafe/6.0.0/system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
   ],
   "logs": []

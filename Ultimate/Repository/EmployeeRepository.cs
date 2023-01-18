@@ -43,7 +43,7 @@ namespace Repository
             .Pagination(emploeyeParameters.PageNumber, emploeyeParameters.PageSize)
             .FilterEmployees(emploeyeParameters.MinAge, emploeyeParameters.MaxAge) //INFO: //INFO: FILTERING!
             .Search(emploeyeParameters.SearchTerm) //INFO: SEARCHING
-            .OrderBy(e => e.Name) //INFO: pagination is in the PagedList from now...
+            .Sort(emploeyeParameters.OrderBy)
             .ToListAsync();
 
             var count = await FindByCondition(e => e.CompanyId.Equals(companyId), trackChanges).CountAsync();

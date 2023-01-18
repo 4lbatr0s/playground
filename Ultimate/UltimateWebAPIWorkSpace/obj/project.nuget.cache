@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "HrNKbPnLPlrQqD7Y0XjHU3ymeSho55xQ8PFICz9oHbZULze2TI7jUCm6xBZL6k6JZRm8TZ0eqGH+zbjrwM+jVQ==",
+  "dgSpecHash": "gVYPAVQBmKIcwqRj7ABHV2q8mpHnwOp58enrzWC577qH2vBEDj/RymnM85wV00nG+sKPBU8LogC5TdoRu0xFpw==",
   "success": true,
   "projectFilePath": "/home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/UltimateWebAPIWorkSpace.csproj",
   "expectedPackageFiles": [
@@ -133,6 +133,7 @@
     "/home/serhatoner/.nuget/packages/system.io.filesystem/4.3.0/system.io.filesystem.4.3.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/system.io.filesystem.primitives/4.3.0/system.io.filesystem.primitives.4.3.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/system.linq/4.3.0/system.linq.4.3.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/system.linq.dynamic.core/1.2.24/system.linq.dynamic.core.1.2.24.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/system.linq.expressions/4.3.0/system.linq.expressions.4.3.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/system.net.http/4.3.4/system.net.http.4.3.4.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/system.net.primitives/4.3.0/system.net.primitives.4.3.0.nupkg.sha512",

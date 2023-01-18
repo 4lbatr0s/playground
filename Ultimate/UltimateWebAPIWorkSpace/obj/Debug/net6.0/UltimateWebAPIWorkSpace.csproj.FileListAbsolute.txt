@@ -95,3 +95,4 @@
 /home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/bin/Debug/net6.0/Microsoft.CodeAnalysis.CSharp.dll
 /home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/bin/Debug/net6.0/Microsoft.CodeAnalysis.Razor.dll
 /home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/bin/Debug/net6.0/System.Security.Permissions.dll
+/home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/bin/Debug/net6.0/System.Linq.Dynamic.Core.dll
