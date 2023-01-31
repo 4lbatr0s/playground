@@ -28,6 +28,7 @@ namespace Ultimate.Presentation.Controllers
         //INFO: We say that we will get employeeParameters from query. If we send a query like helloWorld=10,
         //That means we can ge this query like employeeParameters.helloWorld
         [HttpGet]
+        [HttpHead]
         [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, [FromQuery] EmployeeParameters employeeParameters)
         {

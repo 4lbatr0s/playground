@@ -67,7 +67,8 @@ public static class ServiceExtensions
 
             if(systemTextJsonOutputFormatter != null)
             {
-                systemTextJsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.codemaze.hateoas+json");
+                systemTextJsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.ultimate.hateoas+json");
+                systemTextJsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.ultimate.apiroot+json");
             }
             var xmlOutputFormatter = config.OutputFormatters
             .OfType<XmlDataContractSerializerOutputFormatter>()?
@@ -75,7 +76,8 @@ public static class ServiceExtensions
 
             if (xmlOutputFormatter != null)
             {
-                xmlOutputFormatter.SupportedMediaTypes.Add("application/vnd.codemaze.hateoas+xml");
+                xmlOutputFormatter.SupportedMediaTypes.Add("application/vnd.ultimate.hateoas+xml");
+                xmlOutputFormatter.SupportedMediaTypes.Add("application/vnd.ultimate.apiroot+xml");
             }
         });
     }
