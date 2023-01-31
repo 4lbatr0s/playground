@@ -2,6 +2,8 @@
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.Net.Http.Headers;
 
 namespace Ultimate.Presentation.ActionFilters;
 
@@ -16,7 +18,7 @@ public class ValidationFilterAttribute : IActionFilter
     //TIP: Our code before action executes
     public void OnActionExecuted(ActionExecutedContext context)
     {
-        
+
     }
 
     //
@@ -47,5 +49,42 @@ public class ValidationFilterAttribute : IActionFilter
             }
             context.Result = new UnprocessableEntityObjectResult(errors);
         }
+    }
+}
+
+public class ValidateMediaTypeAttribute : IActionFilter
+{
+    //AFTER EXECUTION: AFTER `RESPONSE EXECUTION` OF THE INVOCATION PIPELINE
+    public void OnActionExecuted(ActionExecutedContext context)
+    {
+
+    }
+
+    //BEFORE EXECUTION : BEFORE `ACTION EXECUTION` OF THE INVOCATION PIPELINE
+    public void OnActionExecuting(ActionExecutingContext context)
+    {
+        //1. check if accept header exists.
+        var acceptHeaderPresent = context.HttpContext
+            .Request.Headers.ContainsKey("Accept");
+
+        //2.if not, bypass the result and return error.
+        if(!acceptHeaderPresent)
+        {
+            context.Result = new BadRequestObjectResult($"Accept header is missing.");
+            return; 
+        }
+        
+        //3. get the accept type from headers.
+        var mediaType = context.HttpContext.Request.Headers["Accept"].FirstOrDefault();
+
+
+        //4. check whether the media type is supported, exists, valid etc.
+        if(!MediaTypeHeaderValue.TryParse(mediaType, out MediaTypeHeaderValue? outMediaType))
+        {
+            context.Result = new BadRequestObjectResult($"Media type not present. Please add Accept header with the required media type.");
+            return;
+        }
+
+        context.HttpContext.Items.Add("AcceptHeaderMediaType", outMediaType);
     }
 }

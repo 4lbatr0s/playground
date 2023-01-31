@@ -6,6 +6,8 @@ using Shared.RequestFeatures;
 using Ultimate.Presentation.ActionFilters;
 using System.Text.Json;
 using Ultimate.Presentation.ModelBinders;
+using Microsoft.AspNetCore.Http;
+using Entities.LinkModels;
 
 namespace Ultimate.Presentation.Controllers
 {
@@ -26,12 +28,13 @@ namespace Ultimate.Presentation.Controllers
         //INFO: We say that we will get employeeParameters from query. If we send a query like helloWorld=10,
         //That means we can ge this query like employeeParameters.helloWorld
         [HttpGet]
+        [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
         public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, [FromQuery] EmployeeParameters employeeParameters)
         {
-            var pagedResult = await _serviceManager.EmployeeService.GetEmployeesAsync(companyId, employeeParameters, trackChanges:
-            false);
+            var linkParams = new LinkParameters(employeeParameters, HttpContext);
+            var pagedResult = await _serviceManager.EmployeeService.GetEmployeesAsync(companyId, linkParams, trackChanges:false);
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData)); //INFO: We use metadata for pagination info.
-            return Ok(pagedResult.employees);
+            return pagedResult.linkResponse.HasLinks? Ok(pagedResult.linkResponse.LinkedEntities) : Ok(pagedResult.linkResponse.ShapedEntities);
         }
 
 

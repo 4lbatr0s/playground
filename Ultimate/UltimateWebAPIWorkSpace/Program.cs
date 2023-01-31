@@ -4,8 +4,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
 using NLog;
+using Service.DataShaping;
+using Shared.DataTransferObjects;
 using Ultimate.Presentation.ActionFilters;
 using UltimateWebAPIWorkSpace.Extensions;
+using UltimateWebAPIWorkSpace.Utilities;
 /**
 * INFO:builder helps us to add Configurations, Services, Loggin Configurations, IHostBuilder and IWebHostBuilder 
 */
@@ -20,6 +23,7 @@ builder.Services.ConfigureCors();
 builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
+builder.Services.ConfigureEmployeeLinks();
 
 // INFO:With this, we are suppressing a default model state validation that is
 // implemented due to the existence of the [ApiController] attribute in
@@ -30,6 +34,8 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 });
 
 builder.Services.AddScoped<ValidationFilterAttribute>();//INFO: Helps us with validation filters
+builder.Services.AddScoped<ValidateMediaTypeAttribute>();//INFO: Helps us with validation of media types
+builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();//INFO: DATA SHAPER
 builder.Services.AddControllers(config =>
 {
     config.RespectBrowserAcceptHeader = true;//INFO: Helps us with Content Negotiation
@@ -39,7 +45,7 @@ builder.Services.AddControllers(config =>
 .AddXmlDataContractSerializerFormatters()
 .AddCustomCSVFormatter() //INFO: to implement a custom csv formatter.
 .AddApplicationPart(typeof(Ultimate.Presentation.AssemblyReference).Assembly); //INFO: To use Controllers inside the Ultimate.Presentation.
-
+builder.Services.AddCustomMediaTypes();//INFO: TO create custom media types for HATEOAS 
 builder.Services.ConfigureSqlContext(builder.Configuration);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddAutoMapper(typeof(Program));//INFO: Automapper.
@@ -48,10 +54,8 @@ builder.Services.AddSwaggerGen();
 
 
 var app = builder.Build(); //INFO:Equivalent of the Configure method in NET5. It's literally our web application instance.
-
 var logger = app.Services.GetRequiredService<ILoggerManager>(); //TIP: You should import it after builder.Build, Builder registers the IoCs.
 app.ConfigureExceptionHandler(logger); //Global Exception handler.
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsProduction())
 {

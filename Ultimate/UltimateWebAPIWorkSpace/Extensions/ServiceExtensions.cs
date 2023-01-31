@@ -1,15 +1,17 @@
 using Contracts;
 using LoggingService;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Service;
 using Service.Contracts;
 using UltimateWebAPIWorkSpace.Formatters.Csv;
-
+using UltimateWebAPIWorkSpace.Utilities;
 /**
- * INFO:We will use this class to introduce our services to Program.cs file.
- * Should be static.
- */
+* INFO:We will use this class to introduce our services to Program.cs file.
+* Should be static.
+*/
 namespace UltimateWebAPIWorkSpace.Extensions;
 
 public static class ServiceExtensions
@@ -40,6 +42,7 @@ public static class ServiceExtensions
 
     public static void ConfigureServiceManager(this IServiceCollection services) =>
     services.AddScoped<IServiceManager, ServiceManager>();
+    
 
     //INFO: To make RepositoryContext run in Runtime instead of Design time:
     public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
@@ -47,7 +50,33 @@ public static class ServiceExtensions
         opts.UseNpgsql(configuration.GetConnectionString("PostgreSQLConnection"))
     );
 
+    public static void ConfigureEmployeeLinks(this IServiceCollection services)=>
+        services.AddScoped<IEmployeeLinks, EmployeeLinks>();
+
+
     //INFO: For adding Formatters (Content Negotiation), add it to Controllers in Program.cs
     public static IMvcBuilder AddCustomCSVFormatter(this IMvcBuilder builder) =>
     builder.AddMvcOptions(config => config.OutputFormatters.Add(new CsvOutputFormatter()));
+
+    //INFO: FOR HATEOAS: this will create custom media types!
+    public static void AddCustomMediaTypes(this IServiceCollection services)
+    {
+        services.Configure<MvcOptions>(config => {
+            var systemTextJsonOutputFormatter = config.OutputFormatters
+            .OfType<SystemTextJsonOutputFormatter>()?.FirstOrDefault();
+
+            if(systemTextJsonOutputFormatter != null)
+            {
+                systemTextJsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.codemaze.hateoas+json");
+            }
+            var xmlOutputFormatter = config.OutputFormatters
+            .OfType<XmlDataContractSerializerOutputFormatter>()?
+            .FirstOrDefault();
+
+            if (xmlOutputFormatter != null)
+            {
+                xmlOutputFormatter.SupportedMediaTypes.Add("application/vnd.codemaze.hateoas+xml");
+            }
+        });
+    }
 }

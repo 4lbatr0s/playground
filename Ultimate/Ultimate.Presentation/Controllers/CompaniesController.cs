@@ -86,6 +86,14 @@ namespace Ultimate.Presentation.Controllers
             return NoContent();
         }
 
+        //INFO: How to create OPTIONS  request.
+        [HttpOptions]
+        public IActionResult GetCompaniesOptions()
+        {
+            Response.Headers.Add("Alow", "GET,OPTIONS,POST");
+            return Ok();
+        }
+
 
     }
 }

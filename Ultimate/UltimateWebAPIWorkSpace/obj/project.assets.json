@@ -268,7 +268,7 @@
           }
         }
       },
-      "Microsoft.AspNetCore.Http/2.2.0": {
+      "Microsoft.AspNetCore.Http/2.2.2": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
@@ -3086,6 +3086,7 @@
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
           "Entities": "1.0.0",
+          "Microsoft.AspNetCore.Http": "2.2.2",
           "Shared": "1.0.0"
         },
         "compile": {
@@ -3098,6 +3099,10 @@
       "Entities/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0",
+          "Shared": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Entities.dll": {}
         },
@@ -3411,16 +3416,16 @@
         "microsoft.aspnetcore.html.abstractions.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Http/2.2.0": {
-      "sha512": "YogBSMotWPAS/X5967pZ+yyWPQkThxhmzAwyCHCSSldzYBkW5W5d6oPfBaPqQOnSHYTpSOSOkpZoAce0vwb6+A==",
+    "Microsoft.AspNetCore.Http/2.2.2": {
+      "sha512": "BAibpoItxI5puk7YJbIGj95arZueM8B8M5xT1fXBn3hb3L2G3ucrZcYXv1gXdaroLbntUs8qeV8iuBrpjQsrKw==",
       "type": "package",
-      "path": "microsoft.aspnetcore.http/2.2.0",
+      "path": "microsoft.aspnetcore.http/2.2.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "lib/netstandard2.0/Microsoft.AspNetCore.Http.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Http.xml",
-        "microsoft.aspnetcore.http.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.http.2.2.2.nupkg.sha512",
         "microsoft.aspnetcore.http.nuspec"
       ]
     },
@@ -8695,8 +8700,10 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "Entities >= 1.0.0",
       "LoggingService >= 1.0.0",
       "Microsoft.AspNetCore.JsonPatch >= 6.0.12",
+      "Microsoft.AspNetCore.Mvc.Abstractions >= 2.2.0",
       "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 6.0.12",
       "Microsoft.EntityFrameworkCore.Design >= 6.0.12",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.12",
@@ -8723,6 +8730,7 @@
       "outputPath": "/home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
+        "/home/serhatoner/Coding/NuGet.Config",
         "/home/serhatoner/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
@@ -8735,6 +8743,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
+            "/home/serhatoner/Coding/playground/Ultimate/Entities/Entities.csproj": {
+              "projectPath": "/home/serhatoner/Coding/playground/Ultimate/Entities/Entities.csproj"
+            },
             "/home/serhatoner/Coding/playground/Ultimate/LoggingService/LoggingService.csproj": {
               "projectPath": "/home/serhatoner/Coding/playground/Ultimate/LoggingService/LoggingService.csproj"
             },
@@ -8769,6 +8780,10 @@
           "Microsoft.AspNetCore.JsonPatch": {
             "target": "Package",
             "version": "[6.0.12, )"
+          },
+          "Microsoft.AspNetCore.Mvc.Abstractions": {
+            "target": "Package",
+            "version": "[2.2.0, )"
           },
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
             "target": "Package",

@@ -1,8 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "E8Jnsy00FTAazfEupAXNEuJsQL1Yl23A1jqDbxtaBs7dn789b7qFaNi4dAacfp0eMMKmpE8aq/QWfnDE8V40Iw==",
+  "dgSpecHash": "l/KOp8wbhFO/AIOajcNxOYpm6YP9289RBKoOGceZ93a4GcIMjhmUSdomXw5hqUEq9qur9uwbbPg73SUDg6IGlg==",
   "success": true,
   "projectFilePath": "/home/serhatoner/Coding/playground/Ultimate/Entities/Entities.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.http.abstractions/2.2.0/microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.http.features/2.2.0/microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.mvc.abstractions/2.2.0/microsoft.aspnetcore.mvc.abstractions.2.2.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.routing.abstractions/2.2.0/microsoft.aspnetcore.routing.abstractions.2.2.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.extensions.primitives/2.2.0/microsoft.extensions.primitives.2.2.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.net.http.headers/2.2.0/microsoft.net.http.headers.2.2.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/system.buffers/4.5.0/system.buffers.4.5.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/system.memory/4.5.1/system.memory.4.5.1.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/system.runtime.compilerservices.unsafe/4.5.1/system.runtime.compilerservices.unsafe.4.5.1.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/system.text.encodings.web/4.5.0/system.text.encodings.web.4.5.0.nupkg.sha512"
+  ],
   "logs": []
 }

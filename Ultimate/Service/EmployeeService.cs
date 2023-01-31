@@ -1,6 +1,8 @@
+using System.Dynamic;
 using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
+using Entities.LinkModels;
 using Entities.Models;
 using Service.Contracts;
 using Shared.DataTransferObjects;
@@ -14,11 +16,15 @@ internal sealed class EmployeeService : IEmployeeService
     private readonly IRepositoryManager _repository;//INFO: RepositoryManager.cs 
     private readonly ILoggerManager _logger;
     private readonly IMapper _mapper;
-    public EmployeeService(ILoggerManager logger, IRepositoryManager repository, IMapper mapper)
+    private readonly IDataShaper<EmployeeDto> _dataShaper;
+    private readonly IEmployeeLinks _employeeLinks;
+
+    public EmployeeService(ILoggerManager logger, IRepositoryManager repository, IMapper mapper, IEmployeeLinks employeeLinks)
     {
         _logger = logger;
         _repository = repository;
         _mapper = mapper;
+        _employeeLinks = employeeLinks;
     }
 
     public async Task<EmployeeDto> CreateEmployeeForCompanyAsync(Guid companyId, EmployeForCreationDto employee, bool trackChanges)
@@ -50,14 +56,15 @@ internal sealed class EmployeeService : IEmployeeService
         return employeeDto;
     }
 
-    public async Task<(IEnumerable<EmployeeDto> employees, MetaData metaData)> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters,  bool trackChanges)
+    public async Task<(LinkResponse linkResponse, MetaData metaData)> GetEmployeesAsync(Guid companyId, LinkParameters linkParameters,  bool trackChanges)
     {
-        if(!employeeParameters.ValidAgeRange)
+        if(!linkParameters.EmployeeParameters.ValidAgeRange)
             throw new MaxAgeRangeBadRequestException();
         await CheckIfCompanyExist(companyId, trackChanges);
-        var employeesWithMetaData = await _repository.Employee.GetEmployeesAsync(companyId, employeeParameters, trackChanges); //TIP: PAGING!
+        var employeesWithMetaData = await _repository.Employee.GetEmployeesAsync(companyId, linkParameters.EmployeeParameters, trackChanges); //TIP: PAGING!
         var employeeDtos = _mapper.Map<IEnumerable<EmployeeDto>>(employeesWithMetaData);
-        return (employees:employeeDtos, metaData:employeesWithMetaData.MetaData);//INFO: MetaData: property of return
+        var links = _employeeLinks.TryGenerateLinks(employeeDtos, linkParameters.EmployeeParameters.Fields, companyId, linkParameters.httpContext);
+        return (linkResponse:links, metaData:employeesWithMetaData.MetaData);//INFO: MetaData: property of return
     }
 
     //INFO: HOW TO PATCH REQUEST!
