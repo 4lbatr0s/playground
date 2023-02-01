@@ -7,6 +7,7 @@ using Ultimate.Presentation.ModelBinders;
 
 namespace Ultimate.Presentation.Controllers
 {
+    [ApiVersion("1.0")] //TIP: DEFAULT API VERSION, IF CLIENT DOES NOT SPECIFY THE DETAIL, THIS WILL BE THE API VERSION
     [Route("api/companies")] //TIP: Best practice, always use name in the route!
     [ApiController]
     public class CompaniesController : ControllerBase

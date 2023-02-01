@@ -24,6 +24,7 @@ builder.Services.ConfigureIISIntegration();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureEmployeeLinks();
+builder.Services.ConfigureVersioning();
 
 // INFO:With this, we are suppressing a default model state validation that is
 // implemented due to the existence of the [ApiController] attribute in

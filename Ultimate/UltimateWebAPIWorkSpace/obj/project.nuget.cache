@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "lu8y/ZG+OgMNm5daEvjy+bt8gEx+GpuOjY7JFfX5V2YXFIshY/rvJSLGDH/4qwMwsgVjluNrAWjQJikIAi1iOQ==",
+  "dgSpecHash": "1ywkGdjpQHFEL8pre5Qahant6Xci1tCx7xpAjNY8d3egLBTmR2Auu6Za11GFCMu0bZi1Wxdw/cO3RG9QrZ0hjg==",
   "success": true,
   "projectFilePath": "/home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/UltimateWebAPIWorkSpace.csproj",
   "expectedPackageFiles": [
@@ -40,6 +40,7 @@
     "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.mvc.razor.extensions/2.2.0/microsoft.aspnetcore.mvc.razor.extensions.2.2.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.mvc.razorpages/2.2.0/microsoft.aspnetcore.mvc.razorpages.2.2.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.mvc.taghelpers/2.2.0/microsoft.aspnetcore.mvc.taghelpers.2.2.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.mvc.versioning/5.0.0/microsoft.aspnetcore.mvc.versioning.5.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.mvc.viewfeatures/2.2.0/microsoft.aspnetcore.mvc.viewfeatures.2.2.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.razor/2.2.0/microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.razor.design/2.2.0/microsoft.aspnetcore.razor.design.2.2.0.nupkg.sha512",
