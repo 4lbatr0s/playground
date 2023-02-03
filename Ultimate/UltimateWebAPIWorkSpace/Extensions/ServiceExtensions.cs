@@ -1,5 +1,7 @@
+using AspNetCoreRateLimit;
 using Contracts;
 using LoggingService;
+using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
@@ -96,6 +98,47 @@ public static class ServiceExtensions
     //INFO: For Response Caching: CACHE STORE, without this, cache-control header wont be enough for caching
     public static void ConfigureResponseCaching(this IServiceCollection services) => services.AddResponseCaching();
 
-    //INFO: For CACHE-VALIDATION MECHANISM.
-    public static void ConfigureHttpCacheHeaders(this IServiceCollection services) => services.AddHttpCacheHeaders();
+    //INFO: Marvin.Cache.Headers lib configurations
+    public static void ConfigureHttpCacheHeaders(this IServiceCollection services) 
+    {
+        services.AddHttpCacheHeaders(
+            (expirationOpt)=>{
+                expirationOpt.MaxAge = 65;
+                expirationOpt.CacheLocation = CacheLocation.Private; //TIP: if we do it private, it wont cache it!
+            },
+            (validationOpt)=>{
+                validationOpt.MustRevalidate = true;
+            }
+        );
+    }
+
+    //INFO: To implement throttling
+        public static void ConfigureRateLimitingOptions(this IServiceCollection services) 
+        {   //TIP: first install the AspNetCoreRateLimit package!
+            //rules
+            var rateLimitRules = new List<RateLimitRule>
+            {
+                new RateLimitRule
+                {
+                    Endpoint = "*",
+                    Limit = 3,
+                    Period = "5m"
+                }
+            };
+            services.Configure<IpRateLimitOptions>(opt => {opt.GeneralRules=rateLimitRules;});
+            services.AddSingleton<IRateLimitCounterStore,MemoryCacheRateLimitCounterStore>();
+            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+            services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+
+            /*
+            We create a rate limit rules first, for now just one, stating that three
+            requests are allowed in a five-minute period for any endpoint in our API.
+            Then, we configure IpRateLimitOptions to add the created rule. Finally, we
+            have to register rate limit stores, configuration, and processing strategy
+            as a singleton. They serve the purpose of storing rate limit counters and
+            policies as well as adding configuration.
+            */
+        }
+
 }

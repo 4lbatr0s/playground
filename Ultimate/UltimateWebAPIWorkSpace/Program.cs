@@ -1,3 +1,4 @@
+using AspNetCoreRateLimit;
 using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
@@ -27,6 +28,10 @@ builder.Services.ConfigureEmployeeLinks();
 builder.Services.ConfigureVersioning();
 builder.Services.ConfigureResponseCaching();
 builder.Services.ConfigureHttpCacheHeaders();
+builder.Services.AddMemoryCache();
+builder.Services.ConfigureRateLimitingOptions();
+builder.Services.AddHttpContextAccessor();
+
 // INFO:With this, we are suppressing a default model state validation that is
 // implemented due to the existence of the [ApiController] attribute in
 // all API controllers:
@@ -70,6 +75,7 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions()//TIP:Will forward proxy he
 {
     ForwardedHeaders = ForwardedHeaders.All
 });
+app.UseIpRateLimiting(); 
 app.UseCors("CorsPolicy");//TIP:Mandatory, use it.
 app.UseResponseCaching();
 app.UseHttpCacheHeaders();
@@ -79,7 +85,6 @@ app.UseAuthorization();
 app.MapControllers();//TIP: Gets endpoints from Controller actions and pass them to IEndpointRouteBuilder.  
 
 app.Run();
-
 ///<summary>
 ///INFO: By using AddNewtonsoftJson, we are replacing the System.Text.Json
 ///formatters for all JSON content. We don’t want to do that so, we are

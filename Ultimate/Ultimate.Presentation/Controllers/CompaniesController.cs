@@ -1,3 +1,4 @@
+using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
@@ -33,6 +34,9 @@ namespace Ultimate.Presentation.Controllers
         
         [HttpGet("{id:guid}", Name = "CompanyById")]//INFO: Our path is api/companies/id, our id's type is GUID!
         // [ResponseCache(Duration = 60)] //INFO: Maven.Cache.Headers  library will configure this!
+        [HttpCacheExpiration(CacheLocation=CacheLocation.Public, MaxAge =60)]//Marvin.Cache.Headers resource level configs example
+        [HttpCacheValidation(MustRevalidate =false)]//Marvin.Cache.Headers resource level configs example
+
         public async Task<IActionResult> GetCompany(Guid id)
         {
             var company = await _serviceManager.CompanyService.GetCompanyAsync(id, trackChanges: false);
