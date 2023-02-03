@@ -25,7 +25,8 @@ builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureEmployeeLinks();
 builder.Services.ConfigureVersioning();
-
+builder.Services.ConfigureResponseCaching();
+builder.Services.ConfigureHttpCacheHeaders();
 // INFO:With this, we are suppressing a default model state validation that is
 // implemented due to the existence of the [ApiController] attribute in
 // all API controllers:
@@ -42,6 +43,7 @@ builder.Services.AddControllers(config =>
     config.RespectBrowserAcceptHeader = true;//INFO: Helps us with Content Negotiation
     config.ReturnHttpNotAcceptable = true;//INFO: to restrict the client from requesting unsupported media types.
     config.InputFormatters.Insert(0, GetJsonPatchInputFormatter());//INFO: We are placing our JsonPatchInputFormatter at the index 0 in the InputFormatters list.
+    config.CacheProfiles.Add("120SecondsDuration", new CacheProfile {Duration = 120}); //INFO: Doesn't need to use ResponseCacheAttribute after this!
 })
 .AddXmlDataContractSerializerFormatters()
 .AddCustomCSVFormatter() //INFO: to implement a custom csv formatter.
@@ -69,8 +71,9 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions()//TIP:Will forward proxy he
     ForwardedHeaders = ForwardedHeaders.All
 });
 app.UseCors("CorsPolicy");//TIP:Mandatory, use it.
+app.UseResponseCaching();
+app.UseHttpCacheHeaders();
 app.UseAuthorization();
-
 //INFO: If we want to add custom middlewares they should place between authorizaton and map controllers.
 
 app.MapControllers();//TIP: Gets endpoints from Controller actions and pass them to IEndpointRouteBuilder.  

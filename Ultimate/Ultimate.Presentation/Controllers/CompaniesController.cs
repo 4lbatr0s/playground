@@ -9,6 +9,7 @@ namespace Ultimate.Presentation.Controllers
 {
     [ApiVersion("1.0")] //TIP: DEFAULT API VERSION, IF CLIENT DOES NOT SPECIFY THE DETAIL, THIS WILL BE THE API VERSION
     [Route("api/companies")] //TIP: Best practice, always use name in the route!
+    // [ResponseCache(CacheProfileName ="120SecondsDuration")]        
     [ApiController]
     public class CompaniesController : ControllerBase
     {
@@ -29,7 +30,9 @@ namespace Ultimate.Presentation.Controllers
             return Ok(companies);
         }
 
+        
         [HttpGet("{id:guid}", Name = "CompanyById")]//INFO: Our path is api/companies/id, our id's type is GUID!
+        // [ResponseCache(Duration = 60)] //INFO: Maven.Cache.Headers  library will configure this!
         public async Task<IActionResult> GetCompany(Guid id)
         {
             var company = await _serviceManager.CompanyService.GetCompanyAsync(id, trackChanges: false);

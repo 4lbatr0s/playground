@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "1ywkGdjpQHFEL8pre5Qahant6Xci1tCx7xpAjNY8d3egLBTmR2Auu6Za11GFCMu0bZi1Wxdw/cO3RG9QrZ0hjg==",
+  "dgSpecHash": "/FxbKL+XB/YvEl2aTeahN7rIPWCaNlhCsGzT+VbCcLEJQDLPJeD69wytjLTgXr0ED5zPSbliDz49Xli6EewLPA==",
   "success": true,
   "projectFilePath": "/home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/UltimateWebAPIWorkSpace.csproj",
   "expectedPackageFiles": [
     "/home/serhatoner/.nuget/packages/automapper/12.0.0/automapper.12.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/automapper.extensions.microsoft.dependencyinjection/12.0.0/automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/humanizer.core/2.8.26/humanizer.core.2.8.26.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/marvin.cache.headers/6.1.0/marvin.cache.headers.6.1.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.antiforgery/2.2.0/microsoft.aspnetcore.antiforgery.2.2.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.aspnetcore.authentication.core/2.2.0/microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",

@@ -91,4 +91,11 @@ public static class ServiceExtensions
             opt.DefaultApiVersion = new ApiVersion(1,0); //TIP: sets the default version count.
         });
     }
+
+
+    //INFO: For Response Caching: CACHE STORE, without this, cache-control header wont be enough for caching
+    public static void ConfigureResponseCaching(this IServiceCollection services) => services.AddResponseCaching();
+
+    //INFO: For CACHE-VALIDATION MECHANISM.
+    public static void ConfigureHttpCacheHeaders(this IServiceCollection services) => services.AddHttpCacheHeaders();
 }
