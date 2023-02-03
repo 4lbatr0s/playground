@@ -1,4 +1,5 @@
 using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
@@ -23,6 +24,7 @@ namespace Ultimate.Presentation.Controllers
 
 
         [HttpGet] //TIP: route of this action will be api/companies.
+        [Authorize(Roles ="Manager")]
         public async Task<IActionResult> GetCompanies()
         {
             //testing the global exception:

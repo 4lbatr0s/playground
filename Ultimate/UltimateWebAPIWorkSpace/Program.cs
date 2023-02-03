@@ -31,6 +31,10 @@ builder.Services.ConfigureHttpCacheHeaders();
 builder.Services.AddMemoryCache();
 builder.Services.ConfigureRateLimitingOptions();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddAuthentication();
+builder.Services.ConfigureIdentity();
+builder.Services.ConfigureJWT(builder.Configuration);
+
 
 // INFO:With this, we are suppressing a default model state validation that is
 // implemented due to the existence of the [ApiController] attribute in
@@ -79,6 +83,7 @@ app.UseIpRateLimiting();
 app.UseCors("CorsPolicy");//TIP:Mandatory, use it.
 app.UseResponseCaching();
 app.UseHttpCacheHeaders();
+app.UseAuthentication();
 app.UseAuthorization();
 //INFO: If we want to add custom middlewares they should place between authorizaton and map controllers.
 

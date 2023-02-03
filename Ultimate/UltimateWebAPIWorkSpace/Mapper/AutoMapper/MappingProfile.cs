@@ -23,5 +23,6 @@ public class MappingProfile : Profile
         CreateMap<EmployeForCreationDto, Employee>();
         CreateMap<EmployeeForUpdateDto, Employee>().ReverseMap();//INFO: We need Mapping from Employee to EmployeeForCreationDto for PATCH REQUEST,THEREFORE REVERSEMAP
         CreateMap<CompanyForUpdateDto, Company>();
+        CreateMap<UserForRegistrationDto, User>();
     }
 }

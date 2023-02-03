@@ -15,13 +15,13 @@ public class ValidationFilterAttribute : IActionFilter
 
     }
 
-    //TIP: Our code before action executes
+    //TIP: Our code after action executes
     public void OnActionExecuted(ActionExecutedContext context)
     {
 
     }
 
-    //
+    //BEFORE EXECUTION : BEFORE `ACTION EXECUTION` OF THE INVOCATION PIPELINE
     public void OnActionExecuting(ActionExecutingContext context)
     {
         var action = context.RouteData.Values["action"];//TIP: With RouteData.Values dictionary, we're going to get controller and action name!

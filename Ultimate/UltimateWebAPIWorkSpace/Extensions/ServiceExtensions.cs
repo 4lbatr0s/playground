@@ -1,10 +1,15 @@
+using System.Text;
 using AspNetCoreRateLimit;
 using Contracts;
+using Entities.Models;
 using LoggingService;
 using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Repository;
 using Service;
 using Service.Contracts;
@@ -44,7 +49,7 @@ public static class ServiceExtensions
 
     public static void ConfigureServiceManager(this IServiceCollection services) =>
     services.AddScoped<IServiceManager, ServiceManager>();
-    
+
 
     //INFO: To make RepositoryContext run in Runtime instead of Design time:
     public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration configuration) =>
@@ -52,7 +57,7 @@ public static class ServiceExtensions
         opts.UseNpgsql(configuration.GetConnectionString("PostgreSQLConnection"))
     );
 
-    public static void ConfigureEmployeeLinks(this IServiceCollection services)=>
+    public static void ConfigureEmployeeLinks(this IServiceCollection services) =>
         services.AddScoped<IEmployeeLinks, EmployeeLinks>();
 
 
@@ -63,11 +68,12 @@ public static class ServiceExtensions
     //INFO: FOR HATEOAS: this will create custom media types!
     public static void AddCustomMediaTypes(this IServiceCollection services)
     {
-        services.Configure<MvcOptions>(config => {
+        services.Configure<MvcOptions>(config =>
+        {
             var systemTextJsonOutputFormatter = config.OutputFormatters
             .OfType<SystemTextJsonOutputFormatter>()?.FirstOrDefault();
 
-            if(systemTextJsonOutputFormatter != null)
+            if (systemTextJsonOutputFormatter != null)
             {
                 systemTextJsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.ultimate.hateoas+json");
                 systemTextJsonOutputFormatter.SupportedMediaTypes.Add("application/vnd.ultimate.apiroot+json");
@@ -85,12 +91,13 @@ public static class ServiceExtensions
     }
 
     //INFO: For API Versioning.
-    public static void ConfigureVersioning(this IServiceCollection services) 
+    public static void ConfigureVersioning(this IServiceCollection services)
     {
-        services.AddApiVersioning(opt => {
+        services.AddApiVersioning(opt =>
+        {
             opt.ReportApiVersions = true; //TIP: Adds the API version to the Response header
             opt.AssumeDefaultVersionWhenUnspecified = true; //TIP: Specifies the default version if client doesnt send one
-            opt.DefaultApiVersion = new ApiVersion(1,0); //TIP: sets the default version count.
+            opt.DefaultApiVersion = new ApiVersion(1, 0); //TIP: sets the default version count.
         });
     }
 
@@ -99,46 +106,104 @@ public static class ServiceExtensions
     public static void ConfigureResponseCaching(this IServiceCollection services) => services.AddResponseCaching();
 
     //INFO: Marvin.Cache.Headers lib configurations
-    public static void ConfigureHttpCacheHeaders(this IServiceCollection services) 
+    public static void ConfigureHttpCacheHeaders(this IServiceCollection services)
     {
         services.AddHttpCacheHeaders(
-            (expirationOpt)=>{
+            (expirationOpt) =>
+            {
                 expirationOpt.MaxAge = 65;
                 expirationOpt.CacheLocation = CacheLocation.Private; //TIP: if we do it private, it wont cache it!
             },
-            (validationOpt)=>{
+            (validationOpt) =>
+            {
                 validationOpt.MustRevalidate = true;
             }
         );
     }
 
     //INFO: To implement throttling
-        public static void ConfigureRateLimitingOptions(this IServiceCollection services) 
-        {   //TIP: first install the AspNetCoreRateLimit package!
-            //rules
-            var rateLimitRules = new List<RateLimitRule>
+    public static void ConfigureRateLimitingOptions(this IServiceCollection services)
+    {   //TIP: first install the AspNetCoreRateLimit package!
+        //rules
+        var rateLimitRules = new List<RateLimitRule>
             {
                 new RateLimitRule
                 {
                     Endpoint = "*",
-                    Limit = 3,
+                    Limit = 30,
                     Period = "5m"
                 }
             };
-            services.Configure<IpRateLimitOptions>(opt => {opt.GeneralRules=rateLimitRules;});
-            services.AddSingleton<IRateLimitCounterStore,MemoryCacheRateLimitCounterStore>();
-            services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
-            services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
-            services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+        services.Configure<IpRateLimitOptions>(opt => { opt.GeneralRules = rateLimitRules; });
+        services.AddSingleton<IRateLimitCounterStore, MemoryCacheRateLimitCounterStore>();
+        services.AddSingleton<IIpPolicyStore, MemoryCacheIpPolicyStore>();
+        services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+        services.AddSingleton<IProcessingStrategy, AsyncKeyLockProcessingStrategy>();
+        /*
+        We create a rate limit rules first, for now just one, stating that three
+        requests are allowed in a five-minute period for any endpoint in our API.
+        Then, we configure IpRateLimitOptions to add the created rule. Finally, we
+        have to register rate limit stores, configuration, and processing strategy
+        as a singleton. They serve the purpose of storing rate limit counters and
+        policies as well as adding configuration.
+        */
+    }
 
+
+    //INFO: To configure ASPNET CORE IDENTITY
+    public static void ConfigureIdentity(this IServiceCollection services)
+    {
+        var builder = services.AddIdentity<User, IdentityRole>(o =>
+        {
+            o.Password.RequireDigit = true;
+            o.Password.RequireLowercase = true;
+            o.Password.RequireUppercase = true;
+            o.Password.RequiredLength = 10;
+            o.User.RequireUniqueEmail = true;
+        })
+        .AddEntityFrameworkStores<RepositoryContext>()
+        .AddDefaultTokenProviders();
+    }
+
+    //INFO: To configure JWT
+    public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
+    {
+        var jwtSettings = configuration.GetSection("JwtSettings");
+        // var secretKey = Environment.GetEnvironmentVariable("SECRET");
+        var secretKey = jwtSettings["secretKEY"];
+        services.AddAuthentication(opt =>
+        {
+            opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
             /*
-            We create a rate limit rules first, for now just one, stating that three
-            requests are allowed in a five-minute period for any endpoint in our API.
-            Then, we configure IpRateLimitOptions to add the created rule. Finally, we
-            have to register rate limit stores, configuration, and processing strategy
-            as a singleton. They serve the purpose of storing rate limit counters and
-            policies as well as adding configuration.
+            INFO:
+            The "issuer" is the entity that generates and signs the JWT,
+            while the "audience" is the intended recipient of the JWT. 
+            The recipient can then use the information in the JWT to perform some actions.
+            The audience and issuer are included in the claims of the JWT and are used to validate the authenticity
+            and purpose of the token.
             */
-        }
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+
+                /*
+                INFO:
+                Additionally, we are providing values for the issuer, the audience, and the
+                secret key that the server uses to generate the signature for JWT.
+                */
+                ValidIssuer = jwtSettings["validIssuer"],
+                ValidAudience = jwtSettings["validAudience"],
+                ClockSkew = TimeSpan.FromSeconds(5),
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+            };
+        });
+    }
 
 }
