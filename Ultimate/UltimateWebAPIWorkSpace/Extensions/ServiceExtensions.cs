@@ -1,3 +1,4 @@
+using System.Security.Cryptography.Xml;
 using System.Text;
 using AspNetCoreRateLimit;
 using Contracts;
@@ -6,11 +7,13 @@ using Entities.Models.ConfigurationModels;
 using LoggingService;
 using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Repository;
 using Service;
 using Service.Contracts;
@@ -220,4 +223,71 @@ public static class ServiceExtensions
         services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettingsII"));
     }
 
+    //INFO: To implement Swagger
+    public static void ConfigureSwagger(this IServiceCollection services)
+    {
+        //TIP: Creating 2 versions of the swagger because we have for instance, 2 versions of CompaniesController.
+        /*
+            The configuration action passed to the AddSwaggerGen() method 
+            adds information such as Contact, License, and Description
+        */
+        services.AddSwaggerGen(s =>
+        {
+            s.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "UltimateAPI",
+                Version = "v1",
+                Description = "Ultimate API by 4lbatr0s",
+                TermsOfService = new Uri("https://github.com/4lbatr0s/Utimate/termsOfService"),
+                Contact = new OpenApiContact
+                {
+                    Name = "Serhat Oner",
+                    Email = "serhatoner@protonmail.com",
+                    Url = new Uri("https://github.com/4lbatr0s"),
+                },
+                License = new OpenApiLicense
+                {
+                    Name = "Ultimate API LICX",
+                    Url = new Uri("https://example.com/license"),
+                }
+            });
+            s.SwaggerDoc("v2", new OpenApiInfo
+            {
+                Title = "UltimateAPI",
+                Version = "v2"
+            });
+
+            //INFO: To implement xml comments
+            var xmlFile = $"{typeof(Ultimate.Presentation.AssemblyReference).Assembly.GetName().Name}.xml";
+            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            s.IncludeXmlComments(xmlPath);
+
+            //INFO: To implement authentication in the Swagger UI.
+            s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                In = ParameterLocation.Header,
+                Description = "Place to add JWT with Bearer",
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer"
+            });
+
+            s.AddSecurityRequirement(new OpenApiSecurityRequirement()
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id ="Bearer"
+                        },
+                        Name = "Bearer",
+                    },
+                    new List<string>()
+                }
+            });
+        });
+
+    }
 }

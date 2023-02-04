@@ -11,6 +11,7 @@ namespace Ultimate.Presentation.Controllers
     [ApiVersion("2.0")]            
     [Route("api/{v:apiversion}/companies")] //TIP:HOW TO SEND API VERSION
     [ApiController]
+    [ApiExplorerSettings(GroupName = "v2")]
     public class CompaniesV2Controller : ControllerBase
     {
         
