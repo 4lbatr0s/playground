@@ -7,11 +7,11 @@ using Ultimate.Presentation.ActionFilters;
 using Ultimate.Presentation.ModelBinders;
 
 namespace Ultimate.Presentation.Controllers
-{   
+{
     [Route("api/authentication")] //TIP:HOW TO SEND API VERSION
     [ApiController]
     public class AuthenticationController : ControllerBase
-    { 
+    {
         private readonly IServiceManager _service;
 
         public AuthenticationController(IServiceManager service)
@@ -24,24 +24,27 @@ namespace Ultimate.Presentation.Controllers
         public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistrationDto)
         {
             var result = await _service.AuthenticationService.RegisterUser(userForRegistrationDto);
-            if(!result.Succeeded)
+            if (!result.Succeeded)
+            {
+                foreach (var error in result.Errors)
                 {
-                    foreach(var error in result.Errors)
-                    {
-                        ModelState.TryAddModelError(error.Code, error.Description);
-                    }
-                    return BadRequest(ModelState);
+                    ModelState.TryAddModelError(error.Code, error.Description);
                 }
+                return BadRequest(ModelState);
+            }
             return StatusCode(201);
         }
 
         [HttpPost("login")]
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
+        public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto
+        user)
         {
-            if(!await _service.AuthenticationService.ValidateUser(user))
+            if (!await _service.AuthenticationService.ValidateUser(user))
                 return Unauthorized();
-            return Ok(new {Token = await _service.AuthenticationService.CreateToken()});
+            var tokenDto = await _service.AuthenticationService
+            .CreateToken(populateExp: true);
+            return Ok(tokenDto);
         }
     }
 }
