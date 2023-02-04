@@ -6,11 +6,13 @@ using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
 using Entities.Models;
+using Entities.Models.ConfigurationModels;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Service.Contracts;
 using Shared.DataTransferObjects;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace Service;
 
@@ -24,17 +26,17 @@ internal sealed class AuthenticationService : IAuthenticationService
     private readonly ILoggerManager _logger;
     private readonly IMapper _mapper;
     private readonly UserManager<User> _userManager; //TIP: provided by Aspnet core Identity API
-    private readonly IConfiguration _configuration;
-
+    private  IOptionsMonitor<JwtConfiguration> _configuration;
     private User? _user; //INFO: We get user info in the ValidateUser method!, because its a heap value, we are able to change it to the current user!
+    private readonly JwtConfiguration _jwtConfiguration;
 
-
-    public AuthenticationService(ILoggerManager logger, IMapper mapper, UserManager<User> userManager, IConfiguration configuration)
+    public AuthenticationService(ILoggerManager logger, IMapper mapper, UserManager<User> userManager, IOptionsMonitor<JwtConfiguration> configuration)
     {
         _logger = logger;
         _mapper = mapper;
         _userManager = userManager;
         _configuration = configuration;
+        _jwtConfiguration = _configuration.CurrentValue;
     }
 
     public async Task<IdentityResult> RegisterUser(UserForRegistrationDto userForRegistration)
@@ -93,8 +95,7 @@ internal sealed class AuthenticationService : IAuthenticationService
     /// <summary>Returns our secret key as a byte array with the security algorithm</summary>
     private SigningCredentials GetSigningCredentials()
     {
-        var jwtSettings = _configuration.GetSection("JWTSettings");
-        var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["secretKey"]));
+        var secretKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfiguration.SecretKey));
         return new SigningCredentials(secretKey, SecurityAlgorithms.HmacSha256);
     }
 
@@ -130,13 +131,12 @@ internal sealed class AuthenticationService : IAuthenticationService
     private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials,
     List<Claim> claims)
     {
-        var jwtSettings = _configuration.GetSection("JwtSettings");
         var tokenOptions = new JwtSecurityToken
         (
-        issuer: jwtSettings["validIssuer"],
-        audience: jwtSettings["validAudience"],
+        issuer: _jwtConfiguration.ValidIssuer,
+        audience: _jwtConfiguration.ValidAudience,
         claims: claims,
-        expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expires"])),
+        expires: DateTime.Now.AddMinutes(Convert.ToDouble(_jwtConfiguration.Expires)),
         signingCredentials: signingCredentials
         );
         return tokenOptions;
@@ -181,16 +181,15 @@ internal sealed class AuthenticationService : IAuthenticationService
     /// <summary>Returns principal from the expired access token</summary>
     private ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
     {
-        var jwtSettings  = _configuration.GetSection("JWTSettings");
         var tokenValidationParameters = new TokenValidationParameters
         {
             ValidateAudience = true,
             ValidateIssuer = true,
             ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings["secretKey"])),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtConfiguration.SecretKey)),
             ValidateLifetime=true,
-            ValidIssuer = jwtSettings["validIssuer"],
-            ValidAudience = jwtSettings["validAudience"],
+            ValidIssuer = _jwtConfiguration.ValidIssuer,
+            ValidAudience = _jwtConfiguration.ValidAudience,
         };
 
         var tokenHandler = new JwtSecurityTokenHandler();

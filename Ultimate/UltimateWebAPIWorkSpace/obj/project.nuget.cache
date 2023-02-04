@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "DRhhe2jt1AyM6wZY1/S2G1nC+p7CB6a78d6Iui7Pz5WFS9RxSKuDHt0pVbYdPLjgbQoxiiLHdZDQ21WGyRMk5Q==",
+  "dgSpecHash": "JiCE5NsdruOAvK9e5VLN23hzIArimTCPbl3dWo1jQ7CFEkkAw1gHF85DdFAa5rU2p80L5O3x/Tgg3S48wcl2pg==",
   "success": true,
   "projectFilePath": "/home/serhatoner/Coding/playground/Ultimate/UltimateWebAPIWorkSpace/UltimateWebAPIWorkSpace.csproj",
   "expectedPackageFiles": [
@@ -70,7 +70,9 @@
     "/home/serhatoner/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.extensions.caching.abstractions/6.0.0/microsoft.extensions.caching.abstractions.6.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.extensions.caching.memory/6.0.1/microsoft.extensions.caching.memory.6.0.1.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.extensions.configuration/6.0.0/microsoft.extensions.configuration.6.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.extensions.configuration.abstractions/6.0.0/microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
+    "/home/serhatoner/.nuget/packages/microsoft.extensions.configuration.binder/6.0.0/microsoft.extensions.configuration.binder.6.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.extensions.dependencyinjection/6.0.1/microsoft.extensions.dependencyinjection.6.0.1.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/6.0.0/microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
     "/home/serhatoner/.nuget/packages/microsoft.extensions.dependencymodel/2.1.0/microsoft.extensions.dependencymodel.2.1.0.nupkg.sha512",

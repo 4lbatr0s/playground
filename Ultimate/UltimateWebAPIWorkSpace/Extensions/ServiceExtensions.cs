@@ -2,6 +2,7 @@ using System.Text;
 using AspNetCoreRateLimit;
 using Contracts;
 using Entities.Models;
+using Entities.Models.ConfigurationModels;
 using LoggingService;
 using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -168,9 +169,13 @@ public static class ServiceExtensions
     //INFO: To configure JWT
     public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
     {
-        var jwtSettings = configuration.GetSection("JwtSettings");
-        // var secretKey = Environment.GetEnvironmentVariable("SECRET");
-        var secretKey = jwtSettings["secretKey"];
+        var jwtConfiguration = new JwtConfiguration();
+        /*
+            TIP: jwtConfiguration is "JwtSettings",
+            So we say bind "JwtSettings" section of configuration file to jwtConfiguration object!
+        */
+        configuration.Bind(jwtConfiguration.Section, jwtConfiguration);//TIP: not case sensitive.
+
         services.AddAuthentication(opt =>
         {
             opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -198,12 +203,21 @@ public static class ServiceExtensions
                 Additionally, we are providing values for the issuer, the audience, and the
                 secret key that the server uses to generate the signature for JWT.
                 */
-                ValidIssuer = jwtSettings["validIssuer"],
-                ValidAudience = jwtSettings["validAudience"],
+                ValidIssuer = jwtConfiguration.ValidIssuer,
+                ValidAudience = jwtConfiguration.ValidAudience,
                 ClockSkew = TimeSpan.FromSeconds(5),
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtConfiguration.SecretKey))
             };
         });
+    }
+
+    //INFO: To implement the IOptions PATTERN,
+    //When we get the value of IOptions<JwtConfiguration> instance like instance.Value, this extension is going to work!  
+    public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
+    {
+        //thanks to NAMED Options, we can reach different configurations through the same JWTConfiguration binding class!
+        services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettings"));
+        services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettingsII"));
     }
 
 }

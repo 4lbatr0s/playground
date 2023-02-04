@@ -4,8 +4,10 @@ using Contracts;
 namespace Service;
 
 using Entities.Models;
+using Entities.Models.ConfigurationModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 
@@ -21,9 +23,11 @@ public sealed class ServiceManager : IServiceManager
     private readonly Lazy<ICompanyService> _companyService;
     private readonly Lazy<IEmployeeService> _employeeService;
     private readonly Lazy<IAuthenticationService> _authenticationService;
+    
 
 
-    public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager loggerManager, IMapper mapper, IEmployeeLinks employeeLinks, UserManager<User> userManager, IConfiguration configuration)
+    public ServiceManager(IRepositoryManager repositoryManager, ILoggerManager loggerManager, IMapper mapper, IEmployeeLinks employeeLinks, 
+    UserManager<User> userManager, IOptionsMonitor<JwtConfiguration> configuration)
     {
         _companyService = new Lazy<ICompanyService>(() => new CompanyService(loggerManager, repositoryManager, mapper));
         _employeeService = new Lazy<IEmployeeService>(() => new EmployeeService(loggerManager, repositoryManager, mapper, employeeLinks));
