@@ -1,4 +1,5 @@
 using System.Runtime.Serialization;
+using Entities.Responses;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
@@ -34,7 +35,8 @@ namespace Ultimate.Presentation.Controllers
         [HttpGet]
         public async Task <IActionResult> GetCompanies()
         {
-            var companies = await _service.CompanyService.GetAllCompaniesAsync(trackChanges:false);
+            var baseResult = await _service.CompanyService.GetAllCompaniesAsync(trackChanges:false);
+            var companies = ((ApiOkResponse<IEnumerable<CompanyDto>>)baseResult).Result;
             var companiesV2 = companies.Select(c=> $"{c.Name} V2");
             return Ok(companiesV2);
         }

@@ -1,3 +1,4 @@
+using System.Net;
 using AspNetCoreRateLimit;
 using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -36,6 +37,13 @@ builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJWT(builder.Configuration);
 builder.Services.AddJwtConfiguration(builder.Configuration);
 builder.Services.ConfigureSwagger();
+// using System.Net;
+
+//INFO: To deploy.
+builder.Services.Configure<ForwardedHeadersOptions>(options =>
+{
+    options.KnownProxies.Add(IPAddress.Parse("10.0.0.100"));
+});
 
 
 // INFO:With this, we are suppressing a default model state validation that is
@@ -79,7 +87,8 @@ app.UseHttpsRedirection();//TIP: Redirects from HTTP to HTTPS.
 app.UseStaticFiles();//TIP:Enables using static files for the request, if we dont set a path for the files it will use wwwroot.
 app.UseForwardedHeaders(new ForwardedHeadersOptions()//TIP:Will forward proxy headers to the current request, it will help us during deployment!
 {
-    ForwardedHeaders = ForwardedHeaders.All
+    // ForwardedHeaders = ForwardedHeaders.All
+    ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto
 });
 app.UseIpRateLimiting();
 app.UseCors("CorsPolicy");//TIP:Mandatory, use it.

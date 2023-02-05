@@ -56,7 +56,7 @@ console.log(student);//No eror no change
 
 
 //VAR Keywords: functional and global  scopes.
-
+//Works like the ref keyword in the C#.
 var x =1;
 if(x===1){
     var x = 10; //It changes!

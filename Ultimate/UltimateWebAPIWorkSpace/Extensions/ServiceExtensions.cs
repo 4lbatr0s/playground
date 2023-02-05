@@ -220,7 +220,8 @@ public static class ServiceExtensions
     {
         //thanks to NAMED Options, we can reach different configurations through the same JWTConfiguration binding class!
         services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettings"));
-        services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettingsII"));
+        //TIP: if we use multiple settings here, the application confuses encoding and decoding processes
+        //services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettingsII"));
     }
 
     //INFO: To implement Swagger

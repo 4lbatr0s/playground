@@ -1,3 +1,4 @@
+using Entities.Responses;
 using Marvin.Cache.Headers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
@@ -5,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 using Ultimate.Presentation.ActionFilters;
+using Ultimate.Presentation.Controllers.Extensions;
 using Ultimate.Presentation.ModelBinders;
 
 namespace Ultimate.Presentation.Controllers
@@ -14,7 +16,7 @@ namespace Ultimate.Presentation.Controllers
     // [ResponseCache(CacheProfileName ="120SecondsDuration")]        
     [ApiController]
     [ApiExplorerSettings(GroupName = "v1")]
-    public class CompaniesController : ControllerBase
+    public class CompaniesController : ApiControllerBase
     {
         private readonly IServiceManager _serviceManager;
 
@@ -28,25 +30,29 @@ namespace Ultimate.Presentation.Controllers
         /// Gets the list of all companies
         /// </summary>
         /// <returns>The companies list</returns>
-        [HttpGet] //TIP: route of this action will be api/companies.
+        //TIP: route of this action will be api/companies.
+        [HttpGet] 
         [Authorize]
         public async Task<IActionResult> GetCompanies()
         {
             //testing the global exception:
             // throw new Exception("Exception");
-            var companies = await _serviceManager.CompanyService.GetAllCompaniesAsync(trackChanges: false);
+            var baseResult = await _serviceManager.CompanyService.GetAllCompaniesAsync(trackChanges: false);
+            var companies = baseResult.GetResult<IEnumerable<CompanyDto>>();
             return Ok(companies);
         }
 
-        
         [HttpGet("{id:guid}", Name = "CompanyById")]//INFO: Our path is api/companies/id, our id's type is GUID!
         // [ResponseCache(Duration = 60)] //INFO: Maven.Cache.Headers  library will configure this!
-        [HttpCacheExpiration(CacheLocation=CacheLocation.Public, MaxAge =60)]//Marvin.Cache.Headers resource level configs example
+        [HttpCacheExpiration(CacheLocation=CacheLocation.Public, MaxAge=60)]//Marvin.Cache.Headers resource level configs example
         [HttpCacheValidation(MustRevalidate =false)]//Marvin.Cache.Headers resource level configs example
 
         public async Task<IActionResult> GetCompany(Guid id)
         {
-            var company = await _serviceManager.CompanyService.GetCompanyAsync(id, trackChanges: false);
+            var baseResult = await _serviceManager.CompanyService.GetCompanyAsync(id, trackChanges: false);
+            if(!baseResult.Success)
+                return ProcessError(baseResult);
+            var company = baseResult.GetResult<CompanyDto>();
             return Ok(company);
         }
 

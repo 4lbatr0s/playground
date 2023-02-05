@@ -10,6 +10,7 @@ using Service.Contracts;
 using Shared.DataTransferObjects.Exceptions;
 using System.Security.Cryptography;
 using System.Reflection.Metadata;
+using Entities.Responses;
 
 namespace Service;
 
@@ -39,12 +40,12 @@ internal sealed class CompanyService : ICompanyService
 
 
     //INFO: Getting all entities from DB IS A BAD IDEA!
-    public async Task<IEnumerable<CompanyDto>> GetAllCompaniesAsync(bool trackChanges)
+    public async Task<ApiBaseResponse> GetAllCompaniesAsync(bool trackChanges)
     { //INFO: We use try catch here not in the Controller!
 
         var companies = await _repository.Company.GetAllCompaniesAsync(trackChanges);
         var companyDtos = _mapper.Map<IEnumerable<CompanyDto>>(companies); //INFO: Destination => Resource, opposite of Mapping Profile!
-        return companyDtos;
+        return new ApiOkResponse<IEnumerable<CompanyDto>>(companyDtos);
     }
 
     //INFO: HOW TO GET A COLLECTION OF ITEMS
@@ -78,11 +79,13 @@ internal sealed class CompanyService : ICompanyService
         return (companies: companyCollectionToReturn, ids: ids); //TIP: How to return dynamic object.
     }
 
-    public async Task<CompanyDto> GetCompanyAsync(Guid companyId, bool trackChanges)
+    public async Task<ApiBaseResponse> GetCompanyAsync(Guid companyId, bool trackChanges)
     {
         var company = await GetCompanyAndCheckIfItExists(companyId, trackChanges);
+        if (company == null)
+            return new CompanyNotFoundResponse(companyId);
         var companyDto = _mapper.Map<CompanyDto>(company);
-        return companyDto;
+        return new ApiOkResponse<CompanyDto>(companyDto);
     }
 
     public async Task DeleteCompanyAsync(Guid companyId, bool trackChanges)
