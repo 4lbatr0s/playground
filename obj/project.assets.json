@@ -8,19 +8,20 @@
     "net6.0": []
   },
   "packageFolders": {
-    "/home/serhat/.nuget/packages/": {}
+    "/home/serhatoner/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/serhat/NET6/playground/playground.csproj",
+      "projectUniqueName": "/home/serhatoner/Coding/playground/playground.csproj",
       "projectName": "playground",
-      "projectPath": "/home/serhat/NET6/playground/playground.csproj",
-      "packagesPath": "/home/serhat/.nuget/packages/",
-      "outputPath": "/home/serhat/NET6/playground/obj/",
+      "projectPath": "/home/serhatoner/Coding/playground/playground.csproj",
+      "packagesPath": "/home/serhatoner/.nuget/packages/",
+      "outputPath": "/home/serhatoner/Coding/playground/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/home/serhat/.nuget/NuGet/NuGet.Config"
+        "/home/serhatoner/Coding/NuGet.Config",
+        "/home/serhatoner/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
@@ -49,7 +50,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -58,7 +60,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.201/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/6.0.404/RuntimeIdentifierGraph.json"
       }
     }
   }

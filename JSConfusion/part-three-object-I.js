@@ -71,7 +71,6 @@ console.log(person2);
 
 
 //INFO:5.CREATE OBJECT WITH Object.create() METHOD!
-
 const person3 = Object.create(person1);
 person1.name = "dalalala";
 console.log("Person3:",person3);
