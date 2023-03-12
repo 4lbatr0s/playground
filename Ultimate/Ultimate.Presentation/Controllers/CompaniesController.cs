@@ -46,7 +46,6 @@ namespace Ultimate.Presentation.Controllers
         // [ResponseCache(Duration = 60)] //INFO: Maven.Cache.Headers  library will configure this!
         [HttpCacheExpiration(CacheLocation=CacheLocation.Public, MaxAge=60)]//Marvin.Cache.Headers resource level configs example
         [HttpCacheValidation(MustRevalidate =false)]//Marvin.Cache.Headers resource level configs example
-
         public async Task<IActionResult> GetCompany(Guid id)
         {
             var baseResult = await _serviceManager.CompanyService.GetCompanyAsync(id, trackChanges: false);

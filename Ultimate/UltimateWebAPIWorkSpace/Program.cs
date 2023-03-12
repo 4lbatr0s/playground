@@ -10,7 +10,6 @@ using Service.DataShaping;
 using Shared.DataTransferObjects;
 using Ultimate.Presentation.ActionFilters;
 using UltimateWebAPIWorkSpace.Extensions;
-using UltimateWebAPIWorkSpace.Utilities;
 /**
 * INFO:builder helps us to add Configurations, Services, Loggin Configurations, IHostBuilder and IWebHostBuilder 
 */
@@ -73,6 +72,7 @@ builder.Services.ConfigureSqlContext(builder.Configuration);
 builder.Services.AddAutoMapper(typeof(Program));//INFO: Automapper.
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 
 
 var app = builder.Build(); //INFO:Equivalent of the Configure method in NET5. It's literally our web application instance.

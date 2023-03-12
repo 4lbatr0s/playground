@@ -25,7 +25,6 @@ public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
                 .AsNoTracking()
         : RepositoryContext.Set<T>()
             .Where(expression);
-
     }
 
     //INFO: Below functions actually do not change anything in the database
