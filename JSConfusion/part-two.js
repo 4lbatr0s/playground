@@ -80,12 +80,12 @@ console.log(
 
 console.log('---------------FIRST CLASS FUNCTIONS CAN BE USED AS A RETURN VALUE!--------------------------------');
 //INFO:4. FIRST CLASS FUNCTIONS CAN be used as a second function in the return of another function!
+//THIS IS CALLED CURRYING.
 const myFunc = function (num) {
     return function toDouble() {
         console.log(num * 2);
     };
 };
-
 myFunc(8)();//16!
 //TIP:Or..
 

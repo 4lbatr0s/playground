@@ -47,7 +47,7 @@
 // });
 
 
-//INFO: 4.PROMISE BOOK EXAMPLE:
+// INFO: 4.PROMISE BOOK EXAMPLE:
 
 const books = [
     {name: "Pinball 1973", author: "Haruki Murakami"},
@@ -65,7 +65,7 @@ const addBookPromise = (newBook)=>{
     const promise1=new Promise((resolve, reject)=> {
         books.push(newBook);
         resolve(books);
-        //reject("hata");
+        reject("hata");
     });
     return promise1;
 }
@@ -79,22 +79,22 @@ addBookPromise(alicaInWonderLand).then((result)=> {
 
 
 
-//5.INFO: Another example:
-const addTwoNumbers = (num1, num2) => {
-    const promise2 = new Promise((resolve, reject) => {
-        const sum = num1 + num2;
-        (typeof num1 !== 'number' || typeof num2 !== 'number')
-        ? reject('2 SAYI GİRMENİZ GEREKİR')
-        : resolve(sum)
-    })
-    return promise2
-}
+// 5.INFO: Another example:
+// const addTwoNumbers = (num1, num2) => {
+//     const promise2 = new Promise((resolve, reject) => {
+//         const sum = num1 + num2;
+//         (typeof num1 !== 'number' || typeof num2 !== 'number')
+//         ? reject('2 SAYI GİRMENİZ GEREKİR')
+//         : resolve(sum)
+//     })
+//     return promise2
+// }
 
-addTwoNumbers(4,54)
-.then((value) => {
-    console.log('TOPLAM: ', value)
-})
-.catch((reason) => {
-    console.log('HATA: ', reason)
-})
+// addTwoNumbers(4,54)
+// .then((value) => {
+//     console.log('TOPLAM: ', value)
+// })
+// .catch((reason) => {
+//     console.log('HATA: ', reason)
+// })
  

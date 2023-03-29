@@ -58,7 +58,7 @@ console.log(student);//No eror no change
 //INFO:VAR Keywords: functional and global  scopes.
 //INFO:Works like the ref keyword in the C#.
 console.log("var keyword area")
-var x =1;
+var x=1;
 if(x===1){
     var x = 10; //It changes because var is global scope!
     console.log(x);
